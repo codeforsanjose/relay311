@@ -13,3 +13,11 @@ CSS,HTML,JavaScript
 # Contributing
 
 Have anything to add? Fork this repository and open a pull request.
+
+# Getting started
+
+TODO: Explain how to use the project
+
+# Installation
+
+TODO: Describe the installation process
