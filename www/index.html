@@ -24,10 +24,38 @@
   <body ng-app="starter">
 
     <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+      <ion-header-bar class="bar-stable" align-title="center">
+        <h1 class="title">SJ 311</h1>
       </ion-header-bar>
-      <ion-content>
+      <ion-content class="center">
+        <div class="row">
+          <div class="col col-50">
+            <ion-item ng-href="#">
+              <i class="icon ion-document"></i>
+            </ion-item>
+            <h4>New Request</h4>
+          </div>
+          <div class="col col-50">
+            <ion-item ng-href="#">
+              <i class="icon ion-folder"></i>
+            </ion-item>
+            <h4>Recent</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-50">
+            <ion-item ng-href="#">
+              <i class="icon ion-filing"></i>
+            </ion-item>
+            <h4>My Requests</h4>
+          </div>
+          <div class="col col-50">
+            <ion-item ng-href="#">
+              <i class="icon ion-person"></i>
+            </ion-item>
+            <h4>Account</h4>
+          </div>
+        </div>
       </ion-content>
     </ion-pane>
   </body>

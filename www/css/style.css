@@ -1,1 +1,26 @@
-/* Empty. Add your own CSS if you like */
+/* Home Icons */
+
+i {
+  font-size: 6em;
+  border: 1px solid #000;
+  border-radius: 100px;
+  margin-bottom: 10px;
+}
+h4 {
+  margin-top: 10px;
+}
+i[class^='icon']::before {
+  padding: 20px;
+}
+i.ion-document::before {
+  padding-right: 28px;
+  padding-left: 28px;
+}
+
+.center {
+  text-align: center;
+}
+
+.col {
+  margin-top: 15px;
+}
