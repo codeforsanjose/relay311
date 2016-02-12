@@ -1,1 +1,39 @@
 /* Empty. Add your own CSS if you like */
+.home {
+    background-color: #387ef5;
+}
+
+.circle-row {
+    margin: 0 auto;
+    width: 90%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.circle-container {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.circle {
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 25px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.circle > .icon {
+    top: 28px;
+    position: relative;
+    font-size: 40px;
+    color: #387ef5;
+}
+
+.btn-title {
+    color: white;
+    font-weight: bold;
+}
