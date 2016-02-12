@@ -17,43 +17,35 @@ angular.module('ionicApp', ['ionic'])
         }
       }
     })
-    .state('tabs.facts', {
-      url: "/facts",
+    .state('tabs.new', {
+      url: "/new",
       views: {
         'home-tab': {
-          templateUrl: "templates/facts.html"
+          templateUrl: "templates/new.html"
         }
       }
     })
-    .state('tabs.facts2', {
-      url: "/facts2",
+    .state('tabs.recent', {
+      url: "/recent",
       views: {
         'home-tab': {
-          templateUrl: "templates/facts2.html"
+          templateUrl: "templates/recent.html"
         }
       }
     })
-    .state('tabs.about', {
-      url: "/about",
+    .state('tabs.mine', {
+      url: "/mine",
       views: {
-        'about-tab': {
-          templateUrl: "templates/about.html"
+        'home-tab': {
+          templateUrl: "templates/mine.html"
         }
       }
     })
-    .state('tabs.navstack', {
-      url: "/navstack",
+    .state('tabs.account', {
+      url: "/account",
       views: {
-        'about-tab': {
-          templateUrl: "templates/nav-stack.html"
-        }
-      }
-    })
-    .state('tabs.contact', {
-      url: "/contact",
-      views: {
-        'contact-tab': {
-          templateUrl: "templates/contact.html"
+        'home-tab': {
+          templateUrl: "templates/account.html"
         }
       }
     });
@@ -65,19 +57,8 @@ angular.module('ionicApp', ['ionic'])
 
 .controller('HomeTabCtrl', function($scope, $ionicModal, $state) {
   console.log('HomeTabCtrl');
-  $ionicModal.fromTemplateUrl('templates/mylongform.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-  $scope.openModal = function(){
-    $scope.modal.show();
-  }
-  $scope.closeModal = function(){
-    $scope.modal.hide();
-  }
-  $scope.onClick = function() {
-    $state.go('tabs.facts');
+  $scope.onClick = function(state) {
+    console.log(state);
+    $state.go('tabs.' + state);
   }
 });
