@@ -1,16 +1,33 @@
 <ion-view view-title="Recent">
   <ion-content class="padding">
     <ion-list>
-      <ion-item ng-repeat="case in cases">
-        <ion-thumbnail item-right>
-          <img ng-src="img/thumbs/{{case.image}}" alt="{{case.title}}">
-        </ion-thumbnail>
 
-        <h2>{{case.title}}</h2>
-        <p>{{case.location}}</p>
-        <p>{{case.description}}</p>
+      <!-- image -->
+      <ion-item ng-repeat="case in cases" class="item-thumbnail-right item-icon-right" type="item-text-wrap" href="#/tab/case/{{case.id}}">
+        <img ng-src="img/thumbs/{{case.image}}" alt="{{case.name}}">
+
+        <!-- title location description -->
+        <div class="col-75">
+          <h2>{{case.title}}</h2>
+          <p>{{case.location}}</p>
+          <p>{{case.description}}</p>
         
-        <button clear item-left>{{case.status}}</button>
+        
+        <!-- status -->
+        <div class="row">
+          <div class="col-33">
+          <button class="button button-small clear item-right" ng-class="case.status === 'Open' ? 'button-balanced' : 'button-assertive'">{{case.status}}</button>
+        </div>
+        <div class="col-5">
+          
+        </div>
+        <div class="col-75">
+          <p>{{case.date | date: 'medium'}}</p>
+        </div>
+        </div>
+        
+
+        <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </ion-list>
   </ion-content>
