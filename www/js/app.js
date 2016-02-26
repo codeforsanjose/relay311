@@ -1,5 +1,4 @@
 angular.module('ionicApp', ['ionic'])
-
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
@@ -59,20 +58,18 @@ angular.module('ionicApp', ['ionic'])
 .controller('HomeTabCtrl', function($scope, $ionicModal, $state) {
   console.log('HomeTabCtrl');
   $scope.onClick = function(state) {
-    console.log(state);
     $state.go('tabs.' + state);
   }
 })
 
-.controller('RecentTabCtrl', ['$scope', function ($scope) {
-
-  // remove after api installed
-  var mockData = [
-    {title: 'Graffiti', location: '311 N 1st St., San Jose, CA, 11111', description: 'Gangster graffiti sprayed on wall of building.', image: 'grafitti_01162016.png', status: 'Open', date: 'Jan 16, 2016'},
-    {title: 'Illegal Dumping', location: '211 N 1st St., San Jose, CA, 11111', description: 'Shopping cart full of junk left by parks\'s bench', image: 'illegal_dumping_12162015.png', status: 'Closed', date: 'Dec 16 2015'},
-    {title: 'Illegal Dumping', location: '100 Market St., San Jose, CA, 11111', description: 'Sofa left on side of road.', image: 'illegal_dumping_02062016.png', status: 'Open', date: 'Feb 06 2016'}
-  ];
-
-
-  $scope.cases = mockData;
+.controller('RecentTabCtrl', ['$scope', 'API', function ($scope, API) {
+    API.getRequests(41.307153, -72.925791).then(function(requests) {
+        var data = requests.data.map(function(request) {
+            if (!request.media_url) {
+                request.media_url = 'http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png';
+            }
+            return request;
+        });
+        $scope.cases = data; 
+    });
 }]);
