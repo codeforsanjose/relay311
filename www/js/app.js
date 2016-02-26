@@ -68,6 +68,12 @@ angular.module('ionicApp', ['ionic'])
             if (!request.media_url) {
                 request.media_url = 'http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png';
             }
+            if (!request.service_name) {
+                request.service_name = "Other";
+            }
+            if (!request.description) {
+                request.description = "No description.";
+            }
             return request;
         });
         $scope.cases = data; 
