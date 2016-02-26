@@ -29,7 +29,8 @@ angular.module('ionicApp', ['ionic'])
       url: "/recent",
       views: {
         'home-tab': {
-          templateUrl: "templates/recent.html"
+          templateUrl: "templates/recent.html",
+          controller: 'RecentTabCtrl'
         }
       }
     })
@@ -61,4 +62,17 @@ angular.module('ionicApp', ['ionic'])
     console.log(state);
     $state.go('tabs.' + state);
   }
-});
+})
+
+.controller('RecentTabCtrl', ['$scope', function ($scope) {
+
+  // remove after api installed
+  var mockData = [
+    {title: 'Graffiti', location: '311 N 1st St., San Jose, CA, 11111', description: 'Gangster graffiti sprayed on wall of building.', image: 'grafitti_01162016.png', status: 'Open', date: 'Jan 16, 2016'},
+    {title: 'Illegal Dumping', location: '211 N 1st St., San Jose, CA, 11111', description: 'Shopping cart full of junk left by parks\'s bench', image: 'illegal_dumping_12162015.png', status: 'Closed', date: 'Dec 16 2015'},
+    {title: 'Illegal Dumping', location: '100 Market St., San Jose, CA, 11111', description: 'Sofa left on side of road.', image: 'illegal_dumping_02062016.png', status: 'Open', date: 'Feb 06 2016'}
+  ];
+
+
+  $scope.cases = mockData;
+}]);

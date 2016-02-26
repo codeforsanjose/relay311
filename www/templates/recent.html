@@ -1,13 +1,34 @@
 <ion-view view-title="Recent">
-<ion-content class="padding">
-    <p>Banging your head against a wall uses 150 calories an hour.</p>
-    <p>Dogs have four toes on their hind feet, and five on their front feet.</p>
-    <p>The ant can lift 50 times its own weight, can pull 30 times its own weight and always falls over on its right side when intoxicated.</p>
-    <p>A cockroach will live nine days without it's head, before it starves to death.</p>
-    <p>Polar bears are left handed.</p>
-    <p>
-    <a class="button icon ion-home" href="#/tab/home"> Home</a>
-    <a class="button icon icon-right ion-chevron-right" href="#/tab/facts2">More Facts</a>
-    </p>
-</ion-content>
+  <ion-content class="padding">
+    <ion-list>
+
+      <!-- image -->
+      <ion-item ng-repeat="case in cases" class="item-thumbnail-right item-icon-right" type="item-text-wrap" href="#/tab/case/{{case.id}}">
+        <img ng-src="img/thumbs/{{case.image}}" alt="{{case.name}}">
+
+        <!-- title location description -->
+        <div class="col-75">
+          <h2>{{case.title}}</h2>
+          <p>{{case.location}}</p>
+          <p>{{case.description}}</p>
+        
+        
+        <!-- status -->
+        <div class="row">
+          <div class="col-33">
+          <button class="button button-small clear item-right" ng-class="case.status === 'Open' ? 'button-balanced' : 'button-assertive'">{{case.status}}</button>
+        </div>
+        <div class="col-5">
+          
+        </div>
+        <div class="col-75">
+          <p>{{case.date | date: 'medium'}}</p>
+        </div>
+        </div>
+        
+
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
 </ion-view>
