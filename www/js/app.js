@@ -1,6 +1,7 @@
 angular.module('open311', [
   'ionic',
-  'open311.controllers'
+  'open311.controllers',
+  'open311.services'
 ])
 
 .config(function($stateProvider, $urlRouterProvider) {
