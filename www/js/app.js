@@ -33,6 +33,15 @@ angular.module('ionicApp', ['ionic'])
         }
       }
     })
+    .state('tabs.case', {
+      url: "/recent/:caseId",
+      views: {
+        'home-tab': {
+          templateUrl: "templates/case.html",
+          controller: 'CaseTabCtrl'
+        }
+      }
+    })
     .state('tabs.mine', {
       url: "/mine",
       views: {
