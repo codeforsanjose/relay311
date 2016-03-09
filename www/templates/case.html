@@ -1,16 +1,16 @@
-<ion-view view-title="Case">
+<ion-view view-title="Case {{case.service_request_id}}">
   <ion-content>
     <div class="list-card">
       
       <div class="item">
-        <h2>Case</h2>
-        <p>Date</p>
+        <h2>{{case.service_name}}</h2>
+        <p>{{case.updated_datetime | date: 'medium'}}</p>
       </div>
         
       <div class="item item-body">
-        <!-- <img ng-src="{{case.media_url}}" alt="{{case.service_name}}"> -->
-        <img src="img/default-placeholder.png" alt="" class="full-image">
-        <p>Description</p>
+        <img ng-src="{{case.media_url}}" alt="{{case.service_name}}" class="full-image">
+        <!-- <img src="img/default-placeholder.png" alt="" class="full-image"> -->
+        <p>{{case.description}}</p>
       </div>
     </div>
   </ion-content>

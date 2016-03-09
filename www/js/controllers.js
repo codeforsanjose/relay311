@@ -6,26 +6,40 @@ angular.module('open311.controllers', [])
   }
 })
 
-.controller('RecentCasesCtrl', ['$scope', 'API', function ($scope, API) {
+.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', 'API', function ($scope, $ionicPlatform, $ionicLoading, API) {
+
     var coords = {lat: 41.307153, long: -72.925791};
-    API.getRequests(coords.lat, coords.long).then(function(requests) {
-        var data = requests.data.map(function(request) {
-            if (!request.media_url) {
-                request.media_url = 'img/default-placeholder.png';
-            }
-            if (!request.service_name) {
-                request.service_name = "Other";
-            }
-            if (!request.description) {
-                request.description = "No description.";
-            }
-            return request;
-        });
-        $scope.cases = data; 
+
+    // same as document ready
+    $ionicPlatform.ready(function() {
+      $scope.haveData = false;
+      $ionicLoading.show ({
+        template: 'Loading...'
+      });
+
+      
+
+      API.getRequests(coords.lat, coords.long).then(function(requests) {
+          var data = requests.data.map(function(request) {
+              if (!request.media_url) {
+                  request.media_url = 'img/default-placeholder.png';
+              }
+              if (!request.service_name) {
+                  request.service_name = "Other";
+              }
+              if (!request.description) {
+                  request.description = "No description.";
+              }
+              return request;
+          });
+
+          $scope.haveData = true;
+          $ionicLoading.hide();
+          $scope.cases = data; 
+      });
     });
 }])
 
 .controller('RecentCaseCtrl', ['$scope', '$stateParams', 'API', function ($scope, $stateParams, API) {
   $scope.case = API.getCase($stateParams.caseId);
-  console.log($scope.case);
 }]);

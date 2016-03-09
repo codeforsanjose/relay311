@@ -14,7 +14,6 @@ angular.module('open311.services', [])
       $http.get('https://seeclickfix.com/open311/v2/requests.json?' + params)
         .then(function(response) {
           recentCasesData = response.data;
-          console.log('response', response);
           deferred.resolve(response);
         }, function(response) {
           deferred.reject(response);
