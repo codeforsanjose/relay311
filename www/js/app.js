@@ -1,4 +1,8 @@
-angular.module('ionicApp', ['ionic'])
+angular.module('open311', [
+  'ionic',
+  'open311.controllers'
+])
+
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
@@ -29,7 +33,7 @@ angular.module('ionicApp', ['ionic'])
       views: {
         'home-tab': {
           templateUrl: "templates/recent.html",
-          controller: 'RecentTabCtrl'
+          controller: 'RecentCasesCtrl'
         }
       }
     })
@@ -38,7 +42,7 @@ angular.module('ionicApp', ['ionic'])
       views: {
         'home-tab': {
           templateUrl: "templates/case.html",
-          controller: 'CaseTabCtrl'
+          controller: 'RecentCaseCtrl'
         }
       }
     })
@@ -62,29 +66,4 @@ angular.module('ionicApp', ['ionic'])
 
    $urlRouterProvider.otherwise("/tab/home");
 
-})
-
-.controller('HomeTabCtrl', function($scope, $ionicModal, $state) {
-  console.log('HomeTabCtrl');
-  $scope.onClick = function(state) {
-    $state.go('tabs.' + state);
-  }
-})
-
-.controller('RecentTabCtrl', ['$scope', 'API', function ($scope, API) {
-    API.getRequests(41.307153, -72.925791).then(function(requests) {
-        var data = requests.data.map(function(request) {
-            if (!request.media_url) {
-                request.media_url = 'http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png';
-            }
-            if (!request.service_name) {
-                request.service_name = "Other";
-            }
-            if (!request.description) {
-                request.description = "No description.";
-            }
-            return request;
-        });
-        $scope.cases = data; 
-    });
-}]);
+});

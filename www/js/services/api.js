@@ -1,5 +1,5 @@
 angular
-.module('ionicApp')
+.module('open311')
 .factory('API', function($http, $httpParamSerializer) {
     return {
         getRequests: function(lat, long) {
