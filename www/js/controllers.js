@@ -25,6 +25,6 @@ angular.module('open311.controllers', [])
     });
 }])
 
-.controller('RecentCaseCtrl', ['$scope', function ($scope) {
+.controller('RecentCaseCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
   
 }]);
