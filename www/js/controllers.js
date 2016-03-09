@@ -10,7 +10,7 @@ angular.module('open311.controllers', [])
     API.getRequests(41.307153, -72.925791).then(function(requests) {
         var data = requests.data.map(function(request) {
             if (!request.media_url) {
-                request.media_url = 'http://cumbrianrun.co.uk/wp-content/uploads/2014/02/default-placeholder.png';
+                request.media_url = 'img/default-placeholder.png';
             }
             if (!request.service_name) {
                 request.service_name = "Other";
@@ -21,6 +21,7 @@ angular.module('open311.controllers', [])
             return request;
         });
         $scope.cases = data; 
+        console.log('data', data);
     });
 }])
 
