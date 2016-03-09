@@ -1,6 +1,6 @@
-# About the San Jose Open 311 Build with Ionic Project
+# About the San Jose Open 311 Build with Ionic
 
-Thanks for stopping by. This readme file includes information pertaining to the San Jose Open 311 build with Ionic, which is a sub-project under the Open 311 project. Our aim is to develop a “311 Gateway”, which will provide a uniform, RESTful, standard API interface. This API interface will allow mobile developers to code against a single API, yet their app will work across a wider geographic area. For further details about the Open 311 project, see https://github.com/codeforsanjose/open311_gateway.
+This is the mobile app repo which is a sub-project under the Open 311 project. This project will create a 311 App for both Android and iOS.  The App will be built using the Open 311 standard.  Thus users of this codebase can link to standard 311 servers or our 311 Open Gateway.  For further details about the Open 311 project, see https://github.com/codeforsanjose/open311-plan-for-san-jose.
 
 ## Administration
 
