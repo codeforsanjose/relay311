@@ -7,7 +7,8 @@ angular.module('open311.controllers', [])
 })
 
 .controller('RecentCasesCtrl', ['$scope', 'API', function ($scope, API) {
-    API.getRequests(41.307153, -72.925791).then(function(requests) {
+    var coords = {lat: 41.307153, long: -72.925791};
+    API.getRequests(coords.lat, coords.long).then(function(requests) {
         var data = requests.data.map(function(request) {
             if (!request.media_url) {
                 request.media_url = 'img/default-placeholder.png';
@@ -21,10 +22,10 @@ angular.module('open311.controllers', [])
             return request;
         });
         $scope.cases = data; 
-        console.log('data', data);
     });
 }])
 
-.controller('RecentCaseCtrl', ['$scope', '$stateParams', function ($scope, $stateParams) {
-  
+.controller('RecentCaseCtrl', ['$scope', '$stateParams', 'API', function ($scope, $stateParams, API) {
+  $scope.case = API.getCase($stateParams.caseId);
+  console.log($scope.case);
 }]);
