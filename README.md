@@ -9,7 +9,9 @@ Download the project
 In the project folder:
 
 To run as web project
-`ionic serve`
+```
+$ ionic serve
+```
 
 To run as mobile project, add mobile platforms accordingly and run it.
 ```
