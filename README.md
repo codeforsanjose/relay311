@@ -4,9 +4,7 @@ This project is related to Open 311 San Jose (https://github.com/codeforsanjose/
 
 ## Getting started
 
-Download the project
-
-In the project folder:
+Clone the project.  In the project folder:
 
 To run as web project
 ```
