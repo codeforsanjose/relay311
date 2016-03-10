@@ -1,23 +1,29 @@
-# About the San Jose Open 311 Build with Ionic
+# About San Jose Open 311 Ionic
 
-This is the mobile app repo which is a sub-project under the Open 311 project. This project will create a 311 App for both Android and iOS.  The App will be built using the Open 311 standard.  Thus users of this codebase can link to standard 311 servers or our 311 Open Gateway.  For further details about the Open 311 project, see https://github.com/codeforsanjose/open311-plan-for-san-jose.
-
-## Administration
-
-Team Lead: Ari Chen
-
-## Languages
-
-CSS,HTML,JavaScript
-
-## Contributing
-
-Have anything to add? Fork this repository and open a pull request.
+This project is related to Open 311 San Jose (https://github.com/codeforsanjose/open311-plan-for-san-jose).  SJ 311 is a public issue tagging app.  The SJ 311 Ionic project is developed with Ionic and to run on iOS and Android.
 
 ## Getting started
 
-TODO: Explain how to use the project
+Download the project
 
-## Installation
+In the project folder:
 
-TODO: Describe the installation process
+To run as web project
+`ionic serve`
+
+To run as mobile project, add mobile platforms accordingly and run it.
+```
+$ ionic platform add ios
+$ ionic platform add android
+```
+
+```
+$ ionic run ios
+$ ionic run android
+```
+
+See ionic installation guide if you need more information (http://ionicframework.com/docs/guide/installation.html)
+
+
+## Contact
+Issue? Suggestion? Contact arichenyc@gmail.com
