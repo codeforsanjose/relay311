@@ -1,5 +1,6 @@
 angular.module('open311', [
   'ionic',
+  'ngCordova',
   'open311.controllers',
   'open311.services'
 ])
