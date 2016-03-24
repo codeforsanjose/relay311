@@ -52,7 +52,8 @@ angular.module('open311', [
       url: "/mine",
       views: {
         'home-tab': {
-          templateUrl: "templates/mine.html"
+          templateUrl: "templates/mine.html",
+          controller: 'MineCtrl'
         }
       }
     })

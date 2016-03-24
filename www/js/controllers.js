@@ -53,4 +53,28 @@ angular.module('open311.controllers', [])
     }
     $scope.case = request;
   });
+}])
+
+.controller('MineCtrl', ['$scope', '$cordovaCamera', '$ionicModal', function ($scope, $cordovaCamera, $ionicModal) {
+  // $ionicModal.fromTemplateUrl('templates/photo-view.html', {
+  //   scope: $scope,
+  //   animation: 'slide-in-up'
+  // }).then(function(modal) {
+  //   $scope.modal = modal;
+  // });
+  $ionicModal.fromTemplateUrl('templates/photo-view.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openPhotoView = function () {
+    console.log('open');
+    $scope.modal.show();
+  };
+  $scope.closePhotoView = function () {
+    console.log('close');
+    $scope.modal.hide();
+    $scope.modal.remove();
+  };
 }]);
