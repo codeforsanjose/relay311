@@ -55,7 +55,7 @@ angular.module('open311.controllers', [])
   });
 }])
 
-.controller('MineCtrl', ['$scope', '$cordovaCamera', '$ionicModal', function ($scope, $cordovaCamera, $ionicModal) {
+.controller('NewRequestCtrl', ['$scope', '$state', '$cordovaCamera', '$ionicModal', function ($scope, $state, $cordovaCamera, $ionicModal) {
 
   $scope.caseImage = 'img/default-placeholder.png';
 
@@ -67,11 +67,9 @@ angular.module('open311.controllers', [])
     $scope.modal = modal;
   });
   $scope.openPhotoView = function () {
-    console.log('open');
     $scope.modal.show();
   };
   $scope.closePhotoView = function () {
-    console.log('close');
     $scope.modal.hide();
     $scope.modal.remove();
   };
@@ -93,6 +91,8 @@ angular.module('open311.controllers', [])
 
     $cordovaCamera.getPicture(options).then(function (imageData) {
       $scope.caseImage = "data:imag/jped;base64," + imageData;
+    }, function (err) {
+      alert('an error occured: ' + err);
     });
   };
   

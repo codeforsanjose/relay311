@@ -26,7 +26,8 @@ angular.module('open311', [
       url: "/new",
       views: {
         'home-tab': {
-          templateUrl: "templates/new.html"
+          templateUrl: "templates/new.html",
+          controller: 'NewRequestCtrl'
         }
       }
     })
@@ -52,8 +53,7 @@ angular.module('open311', [
       url: "/mine",
       views: {
         'home-tab': {
-          templateUrl: "templates/mine.html",
-          controller: 'MineCtrl'
+          templateUrl: "templates/mine.html"
         }
       }
     })
