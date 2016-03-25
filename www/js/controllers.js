@@ -53,4 +53,47 @@ angular.module('open311.controllers', [])
     }
     $scope.case = request;
   });
+}])
+
+.controller('NewRequestCtrl', ['$scope', '$state', '$cordovaCamera', '$ionicModal', function ($scope, $state, $cordovaCamera, $ionicModal) {
+
+  $scope.caseImage = 'img/default-placeholder.png';
+
+  // PhotoView Modal 
+  $ionicModal.fromTemplateUrl('templates/photo-view.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
+  $scope.openPhotoView = function () {
+    $scope.modal.show();
+  };
+  $scope.closePhotoView = function () {
+    $scope.modal.hide();
+    $scope.modal.remove();
+  };
+
+  // Camera 
+  $scope.newPicture = function () {
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 100,
+      targetHeight: 100,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+      correctionOrientation: true
+    };
+
+    $cordovaCamera.getPicture(options).then(function (imageData) {
+      $scope.caseImage = "data:imag/jped;base64," + imageData;
+    }, function (err) {
+      alert('an error occured: ' + err);
+    });
+  };
+  
 }]);

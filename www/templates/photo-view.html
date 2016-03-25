@@ -1,0 +1,21 @@
+<ion-modal-view class="photo-view">
+
+  <h2 class="center">Camera</h2>
+
+  <ion-content class="has-header">
+    <div class="item">
+      <button class="button button-dark button-block button-outline" ng-click="newPicture()">
+        <i class="icon ion-ios-camera-outline big"></i>
+      </button>
+    </div>
+
+    <div class="item item-image">
+      <img ng-src="{{caseImage}}" alt="">
+    </div>
+
+    <div class="item">
+      <button class="button button-assertive button-block" ng-click="closePhotoView()">Close</button>
+    </div>
+  </ion-content>
+
+</ion-modal-view>

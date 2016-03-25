@@ -1,5 +1,6 @@
 angular.module('open311', [
   'ionic',
+  'ngCordova',
   'open311.controllers',
   'open311.services'
 ])
@@ -25,7 +26,8 @@ angular.module('open311', [
       url: "/new",
       views: {
         'home-tab': {
-          templateUrl: "templates/new.html"
+          templateUrl: "templates/new.html",
+          controller: 'NewRequestCtrl'
         }
       }
     })
