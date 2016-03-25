@@ -5,7 +5,18 @@ This project is related to Open 311 San Jose (https://github.com/codeforsanjose/
 
 ## Getting started
 
-Clone the project.  In the project folder:
+Make sure you have [Node.js](https://nodejs.org/en/) installed.  We usually recommend having the LTS version (v4.4.1) installed.
+
+Then, install [Ionic](http://ionicframework.com/):
+```
+# You may need to use `sudo`
+$ npm install -g ionic cordova
+```
+
+Clone the project.
+```
+$ git clone https://github.com/codeforsanjose/sj311-ionic.git
+```
 
 To run as web project
 ```
