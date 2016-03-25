@@ -77,20 +77,20 @@ angular.module('open311.controllers', [])
   // Camera 
   $scope.newPicture = function () {
     var options = {
-      quality: 50,
+      quality: 100,
       destinationType: Camera.DestinationType.DATA_URL,
       sourceType: Camera.PictureSourceType.CAMERA,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 100,
-      targetHeight: 100,
+      targetWidth: 500,
+      targetHeight: 500,
       popoverOptions: CameraPopoverOptions,
       saveToPhotoAlbum: false,
       correctionOrientation: true
     };
 
     $cordovaCamera.getPicture(options).then(function (imageData) {
-      $scope.caseImage = "data:imag/jped;base64," + imageData;
+      $scope.caseImage = "data:image/jpeg;base64," + imageData;
     }, function (err) {
       alert('an error occured: ' + err);
     });
