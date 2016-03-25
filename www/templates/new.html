@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-25 frame">
             <a ng-click="openPhotoView()" class="item">
-              <img src="../img/camera-icon.png" alt="">
+              <img ng-src="{{caseImage}}" alt="">
             </a>
           </div>
 
@@ -27,7 +27,7 @@
 
       <div class="item item-body">
         <p class="item">Location</p>
-        <img src="../img/google-maps.png" alt="" class="full-image">
+        <div id="map" data-tap-disabled="true"></div>
       </div>
     </div>
 
