@@ -38,42 +38,15 @@
     font-weight: bold;
 }
 
-// ***** mine *****
-// i.frame-top {
-//     color: blue;
-//     background: black;
-//     height: 100px !important;
-//     width: 100px !important;
-//     font-size: 35px;
-//     position: absolute;
-//     top: 20px;
-//     left: 20px;
-// }
-
 i.camera::before {
     height: 100%;
     width: 100%;
 }
 
-.frame, .frame-top {
-    border: 1px solid black;
-    margin-right: 15px;
-    margin-top: 2px;
-    height: 80px;
-    border-radius: 45px;
-    overflow: hidden;
-    position: relative;
+.frame {
+    margin-top: 10px;
 }
 
-.frame-top a {
-    margin: 0 auto;
-    height: 100px;
-    width: 100px;
-    // background-color: pink;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
 .frame a {
     padding: 10px;
 }
@@ -82,6 +55,8 @@ i.camera::before {
     margin: 0 auto;
     width: 100%;
     height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .big {
@@ -96,4 +71,9 @@ i.camera::before {
 }
 .photo-view h2 {
     color: #ffffff;
+}
+
+#map {
+    height: 300px;
+    width: 100%;
 }

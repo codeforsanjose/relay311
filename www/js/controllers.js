@@ -17,8 +17,6 @@ angular.module('open311.controllers', [])
         template: 'Loading...'
       });
 
-      
-
       API.getRequests(coords.lat, coords.long).then(function(requests) {
           var data = requests.data.map(function(request) {
               if (!request.media_url) {
@@ -55,7 +53,8 @@ angular.module('open311.controllers', [])
   });
 }])
 
-.controller('NewRequestCtrl', ['$scope', '$state', '$cordovaCamera', '$ionicModal', function ($scope, $state, $cordovaCamera, $ionicModal) {
+.controller('NewRequestCtrl', ['$scope', '$state', '$cordovaCamera', '$ionicModal', 
+function ($scope, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
 
   $scope.caseImage = 'img/default-placeholder.png';
 
@@ -66,12 +65,12 @@ angular.module('open311.controllers', [])
   }).then(function(modal) {
     $scope.modal = modal;
   });
+  
   $scope.openPhotoView = function () {
     $scope.modal.show();
   };
   $scope.closePhotoView = function () {
     $scope.modal.hide();
-    $scope.modal.remove();
   };
 
   // Camera 
@@ -91,9 +90,17 @@ angular.module('open311.controllers', [])
 
     $cordovaCamera.getPicture(options).then(function (imageData) {
       $scope.caseImage = "data:image/jpeg;base64," + imageData;
-    }, function (err) {
-      alert('an error occured: ' + err);
     });
   };
+  
+  var options = {timeout: 10000, enableHighAccuracy: true};
+ 
+  var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
+  var mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
   
 }]);
