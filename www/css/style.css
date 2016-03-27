@@ -18,16 +18,16 @@
 
 .circle {
     background-color: white;
-    width: 100px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
     border-radius: 50%;
-    margin: 25px;
+    margin: 20px;
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
 .circle > .icon {
-    top: 28px;
+    top: 22px;
     position: relative;
     font-size: 40px;
     color: #387ef5;
