@@ -18,6 +18,8 @@ Clone the project.
 $ git clone https://github.com/codeforsanjose/sj311-ionic.git
 ```
 
+To run the project, cd into sj311-ionic folder. Then -
+
 To run as web project
 ```
 $ ionic serve
