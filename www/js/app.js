@@ -5,8 +5,9 @@ angular.module('open311', [
   'open311.services'
 ])
 
-.config(function($stateProvider, $urlRouterProvider) {
-
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  $ionicConfigProvider.backButton.text('Back');
+  
   $stateProvider
     .state('tabs', {
       url: "/tab",
