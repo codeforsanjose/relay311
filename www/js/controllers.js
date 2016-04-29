@@ -8,7 +8,7 @@ angular.module('open311.controllers', [])
 
 .controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', 'API', function ($scope, $ionicPlatform, $ionicLoading, API) {
 
-    var coords = {lat: 41.307153, long: -72.925791};
+    var coords = {lat: 37.339244, lng: -121.883638};
 
     // same as document ready
     $ionicPlatform.ready(function() {
@@ -17,7 +17,7 @@ angular.module('open311.controllers', [])
         template: 'Loading...'
       });
 
-      API.getRequests(coords.lat, coords.long).then(function(requests) {
+      API.getRequests(coords.lat, coords.lng).then(function(requests) {
           var data = requests.data.map(function(request) {
               if (!request.media_url) {
                   request.media_url = 'img/default-placeholder.png';
