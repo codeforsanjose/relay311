@@ -1,18 +1,18 @@
 angular.module('open311.services', [])
 .factory('API', function($http, $httpParamSerializer, $q) {
 
-    var SEECLICKFIX_API = 'https://seeclickfix.com/open311/v2';
+    var SERVER_PATH = 'http://52.34.144.221:80/v1';
     var recentCasesData = [];
 
     var getRequests = function(lat, long) {
 
       var params = $httpParamSerializer({
           lat: lat,
-          long: long 
+          lng: long 
       });
 
 
-      return $http.get(SEECLICKFIX_API + '/requests.json?' + params)
+      return $http.get(SERVER_PATH + '/requests.json?' + params)
         .then(function(response) {
           recentCasesData = response.data;
           return response;
