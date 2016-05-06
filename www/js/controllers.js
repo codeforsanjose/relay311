@@ -1,4 +1,5 @@
 angular.module('open311.controllers', [])
+
 .controller('HomeTabCtrl', function($scope, $ionicModal, $state) {
   console.log('HomeTabCtrl');
   $scope.onClick = function(state) {
@@ -6,55 +7,65 @@ angular.module('open311.controllers', [])
   }
 })
 
-.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', 'API', function ($scope, $ionicPlatform, $ionicLoading, API) {
+.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', 'API', function($scope, $ionicPlatform, $ionicLoading, API) {
 
-    var coords = {lat: 37.339244, lng: -121.883638};
+  var coords = { lat: 37.339244, lng: -121.883638 };
 
-    // same as document ready
-    $ionicPlatform.ready(function() {
-      $scope.haveData = false;
-      $ionicLoading.show ({
-        template: 'Loading...'
-      });
-
-      API.getRequests(coords.lat, coords.lng).then(function(requests) {
-          var data = requests.data.map(function(request) {
-              if (!request.media_url) {
-                  request.media_url = 'img/default-placeholder.png';
-              }
-              if (!request.service_name) {
-                  request.service_name = "Other";
-              }
-              if (!request.description) {
-                  request.description = "No description.";
-              }
-              return request;
-          });
-
-          $scope.haveData = true;
-          $ionicLoading.hide();
-          $scope.cases = data; 
-      });
+  // same as document ready
+  $ionicPlatform.ready(function() {
+    console.log('ready');
+    $scope.haveData = false;
+    $ionicLoading.show({
+      template: 'Loading...'
     });
+
+    API.getRequests(coords.lat, coords.lng).then(function(requests) {
+      var data = requests.data.map(function(request) {
+        if (!request.media_url) {
+          request.media_url = 'img/default-placeholder.png';
+        }
+        if (!request.service_name) {
+          request.service_name = "Other";
+        }
+        if (!request.description) {
+          request.description = "No description.";
+        }
+        return request;
+      });
+
+      console.log(requests);
+
+      $scope.haveData = true;
+      $ionicLoading.hide();
+      $scope.cases = data;
+    });
+  });
 }])
 
-.controller('RecentCaseCtrl', ['$scope', '$stateParams', 'API', function ($scope, $stateParams, API) {
+.controller('RecentCaseCtrl', ['$scope', '$ionicPlatform', '$stateParams', 'API', function($scope, $stateParams, API) {
   API.getCase($stateParams.caseId).then(function(request) {
     if (!request.media_url) {
-        request.media_url = 'img/default-placeholder.png';
+      request.media_url = 'img/default-placeholder.png';
     }
     if (!request.service_name) {
-        request.service_name = "Other";
+      request.service_name = "Other";
     }
     if (!request.description) {
-        request.description = "No description.";
+      request.description = "No description.";
     }
     $scope.case = request;
   });
 }])
 
-.controller('NewRequestCtrl', ['$scope', '$state', '$cordovaCamera', '$ionicModal', 
-function ($scope, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
+.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', '$state', '$cordovaCamera', '$ionicModal',
+function($scope, $ionicPlatform, API, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
+
+  // dummy lat&lng, will replace by location of user's location
+  var coords = { lat: 37.339244, lng: -121.883638 };
+  
+  $scope.goto = function(name) {
+    $state.go('tabs.' + name);
+  };
 
   $scope.caseImage = 'img/default-placeholder.png';
 
@@ -65,16 +76,16 @@ function ($scope, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
   }).then(function(modal) {
     $scope.modal = modal;
   });
-  
-  $scope.openPhotoView = function () {
+
+  $scope.openPhotoView = function() {
     $scope.modal.show();
   };
-  $scope.closePhotoView = function () {
+  $scope.closePhotoView = function() {
     $scope.modal.hide();
   };
 
   // Camera 
-  $scope.newPicture = function () {
+  $scope.newPicture = function() {
     var options = {
       quality: 100,
       destinationType: Camera.DestinationType.DATA_URL,
@@ -88,19 +99,33 @@ function ($scope, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
       correctionOrientation: true
     };
 
-    $cordovaCamera.getPicture(options).then(function (imageData) {
+    $cordovaCamera.getPicture(options).then(function(imageData) {
       $scope.caseImage = "data:image/jpeg;base64," + imageData;
     });
   };
-  
-  var options = {timeout: 10000, enableHighAccuracy: true};
- 
+
+  var options = { timeout: 10000, enableHighAccuracy: true };
+
   var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
   var mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+    center: latLng,
+    zoom: 15,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   };
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+}])
+
+.controller('CategoryCtrl', ['$scope', '$ionicPlatform', 'API', function($scope, $ionicPlatform, API){
+  var coords = { lat: 37.339244, lng: -121.883638 };
+  
+  // ari: test api, will move this part to category picker
+  $ionicPlatform.ready(function() {
+    console.log(API);
+    API.getCategories(coords.lat, coords.lng).then(function(response) {
+      console.log(response);
+      $scope.data = response.data;
+    });
+  });
   
 }]);

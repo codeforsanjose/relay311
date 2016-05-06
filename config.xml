@@ -23,7 +23,7 @@
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
     <icon src="resources/ios/icon/icon@2x.png" width="114" height="114"/>
-    <icon src="resources/ios/icon/icon-40.png" width="40" height="40"/>
+    <icon src="resources/ios/igetRequestscon/icon-40.png" width="40" height="40"/>
     <icon src="resources/ios/icon/icon-40@2x.png" width="80" height="80"/>
     <icon src="resources/ios/icon/icon-50.png" width="50" height="50"/>
     <icon src="resources/ios/icon/icon-50@2x.png" width="100" height="100"/>

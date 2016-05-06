@@ -65,6 +65,15 @@ angular.module('open311', [
           templateUrl: "templates/account.html"
         }
       }
+    })
+    .state('tabs.categories', {
+      url: "/categories",
+      views: {
+        'home-tab': {
+          templateUrl: "templates/categories.html",
+          controller: "CategoryCtrl"
+        }
+      }
     });
 
 
