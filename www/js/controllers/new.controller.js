@@ -50,7 +50,6 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
   var posOptions = {timeout: 10000, enableHighAccuracy: true};
 
   var geocoder = new google.maps.Geocoder;
-  var infowindow = new google.maps.InfoWindow;
 
   $scope.getLocation = function() {
     $cordovaGeolocation
@@ -58,19 +57,16 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
       .then(function (position) {
         var lat  = position.coords.latitude;
         var long = position.coords.longitude;
-        // console.log('lat', lat);
-        // console.log('long', long);
 
         geocoder.geocode({'location': {'lat':lat, 'lng':long}}, function(results, status) {
           if (results[1]) {
-            $scope.map.setZoom(11);
+            $scope.map.setZoom(15);
             var marker = new google.maps.Marker({
               position: {'lat':lat, 'lng':long},
-              map: $scope.map
+              map: $scope.map,
+              animation: google.maps.Animation.DROP,
+              draggable: true
             });
-            console.log(results[1].formatted_address);
-            infowindow.setContent(results[1].formatted_address);
-            infowindow.open($scope.map, marker);
           } else {
             console.log('No results found');
           }
