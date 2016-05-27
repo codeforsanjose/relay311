@@ -45,7 +45,7 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
     };
 
     $cordovaCamera.getPicture(options).then(function(imageData) {
-      $scope.caseImage = "data:image/jpeg;base64," + imageData;
+      $scope.case.image = "data:image/jpeg;base64," + imageData;
     });
   };
 
