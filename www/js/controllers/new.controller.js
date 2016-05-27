@@ -16,6 +16,9 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
+    if (ionic.Platform.isIOS()) {
+      ionic.Platform.fullScreen();
+    }
     $scope.modal = modal;
   });
 
