@@ -61,10 +61,9 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
         $scope.case.lng = long;
 
         geocoder.geocode({'location': {'lat':lat, 'lng':long}}, function(results, status) {
-          if (results[1]) {
+          if (results && results[1]) {
             $scope.$apply(function() {
               $scope.case.location = results[0].formatted_address;
-              
             });
             $scope.map.setZoom(15);
             var marker = new google.maps.Marker({
