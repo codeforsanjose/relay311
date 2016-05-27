@@ -1,0 +1,14 @@
+<ion-view view-title="Categories">
+  <ion-content class="padding">
+
+    <ion-searchbar ng-model="searchText">
+    </ion-searchbar>
+
+    <ion-list>
+      <ion-item ng-repeat="item in data" ng-click="selectItem(item.service_name)">
+        {{item.service_name}}
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

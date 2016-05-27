@@ -1,28 +1,44 @@
 <ion-view view-title="New Request">
+  <ion-nav-buttons side="right">
+    <button class="button" ng-click="submit()">
+      Done
+    </button>
+  </ion-nav-buttons>
+
   <ion-content>
-    
-  <div class="list card">
-    
+
+    <div class="list card">
+
       <div class="item">
         <div class="row">
           <div class="col-25 frame">
             <a ng-click="openPhotoView()" class="item">
-              <img ng-src="{{caseImage}}" alt="">
+              <img ng-src="{{case.image}}" alt="">
             </a>
           </div>
 
           <div class="col-75">
-            <a href="#" class="item item-icon-right">
+            <div class="item item-icon-right" ng-click="goto('categories')">
               <h2>Category</h2>
+              <label>{{case.category}}</label>
               <i class="icon ion-chevron-right icon-accessory"></i>
-            </a>
-            
-            <a href="" class="item item-icon-right">
-              <p>Description</p>
-              <i class="icon ion-chevron-right icon-accessory"></i>
-            </a>
+            </div>
           </div>
         </div>
+      </div>
+
+      <div class="item">
+        <label class="item item-input item-stacked-label">
+          <label class="input-label">Title</label>
+          <input type="text" placeholder="Title" ng-model="case.title"></input>
+        </label>
+      </div>
+
+      <div class="item">
+        <label class="item item-input item-stacked-label">
+          <label class="input-label">Description</label>
+          <textarea placeholder="Description" rows="3" ng-model="case.description"></textarea>
+        </label>
       </div>
 
       <div class="item item-body">
