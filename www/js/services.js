@@ -51,13 +51,20 @@ angular.module('open311.services', [])
 
 // Retaining new request object while editing
   .factory('NewRequest', function () {
-    var object = {
-      'image': 'img/default-placeholder.png'
+    var defaultObject = function () {
+      return {
+        'image': 'img/default-placeholder.png'
+      }
     };
+    var object = defaultObject();
 
     return {
       get: function () {
         return object;
+      },
+      getNew: function () {
+        obj = defaultObject();
+        return obj;
       },
       set: function (obj) {
         object = obj;

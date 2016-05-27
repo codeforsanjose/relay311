@@ -16,14 +16,14 @@
               <img ng-src="{{case.image}}" alt="">
             </a>
           </div>
+        </div>
+      </div>
 
-          <div class="col-75">
-            <div class="item item-icon-right" ng-click="goto('categories')">
-              <h2>Category</h2>
-              <label>{{case.category}}</label>
-              <i class="icon ion-chevron-right icon-accessory"></i>
-            </div>
-          </div>
+      <div class="item">
+        <div class="item item-icon-right" ng-click="goto('categories')">
+          <label class="input-label">Service Type</label>
+          <label>{{case.category.service_name || 'Select a service type'}}</label>
+          <i class="icon ion-chevron-right icon-accessory"></i>
         </div>
       </div>
 
