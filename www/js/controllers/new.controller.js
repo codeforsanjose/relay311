@@ -1,5 +1,5 @@
 angular.module('open311.controllers')
-.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'NewRequest', '$state', '$cordovaCamera', '$ionicModal',
+.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'NewRequest', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation',
 function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
 
   // dummy lat&lng, will replace by location of user's location
@@ -46,7 +46,37 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
     });
   };
 
-  var options = { timeout: 10000, enableHighAccuracy: true };
+  // Geolocation
+  var posOptions = {timeout: 10000, enableHighAccuracy: true};
+
+  var geocoder = new google.maps.Geocoder;
+  var infowindow = new google.maps.InfoWindow;
+
+  $scope.getLocation = function() {
+    $cordovaGeolocation
+      .getCurrentPosition(posOptions)
+      .then(function (position) {
+        var lat  = position.coords.latitude;
+        var long = position.coords.longitude;
+        // console.log('lat', lat);
+        // console.log('long', long);
+
+        geocoder.geocode({'location': {'lat':lat, 'lng':long}}, function(results, status) {
+          if (results[1]) {
+            $scope.map.setZoom(11);
+            var marker = new google.maps.Marker({
+              position: {'lat':lat, 'lng':long},
+              map: $scope.map
+            });
+            console.log(results[1].formatted_address);
+            infowindow.setContent(results[1].formatted_address);
+            infowindow.open($scope.map, marker);
+          } else {
+            console.log('No results found');
+          }
+      });
+    });
+  };
 
   var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
   var mapOptions = {

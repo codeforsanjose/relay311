@@ -42,7 +42,18 @@
       </div>
 
       <div class="item item-body">
-        <p class="item">Location</p>
+        <div class="item">
+          <div class="row">
+            <div class="col col-75">
+              <input class="addressInput" placeholder="Location" ng-model="addressEntered"></input>
+            </div>
+            <div class="col col-25">
+              <button class="button button-stable button-outline" ng-click="getLocation()">
+                <i class="icon ion-ios-location-outline icon-accessory"></i>
+              </button>
+            </div>
+          </div>
+        </div>
         <div id="map" data-tap-disabled="true"></div>
       </div>
     </div>
