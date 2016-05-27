@@ -73,11 +73,6 @@ i.camera::before {
     color: #ffffff;
 }
 
-.addressInput {
-    height: 57px;
-    border: 1px solid #000000;
-}
-
 #map {
     height: 300px;
     width: 100%;
