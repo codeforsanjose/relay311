@@ -57,9 +57,15 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
       .then(function (position) {
         var lat  = position.coords.latitude;
         var long = position.coords.longitude;
+        $scope.case.lat = lat;
+        $scope.case.lng = long;
 
         geocoder.geocode({'location': {'lat':lat, 'lng':long}}, function(results, status) {
           if (results[1]) {
+            $scope.$apply(function() {
+              $scope.case.location = results[0].formatted_address;
+              
+            });
             $scope.map.setZoom(15);
             var marker = new google.maps.Marker({
               position: {'lat':lat, 'lng':long},
@@ -67,8 +73,6 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
               animation: google.maps.Animation.DROP,
               draggable: true
             });
-          } else {
-            console.log('No results found');
           }
       });
     });
