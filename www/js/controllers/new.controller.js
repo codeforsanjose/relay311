@@ -1,5 +1,5 @@
 angular.module('open311.controllers')
-.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'NewRequest', '$state', '$cordovaCamera', '$ionicModal',
+.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'NewRequest', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation',
 function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
 
   // dummy lat&lng, will replace by location of user's location
@@ -16,6 +16,9 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
     scope: $scope,
     animation: 'slide-in-up'
   }).then(function(modal) {
+    if (ionic.Platform.isIOS()) {
+      ionic.Platform.fullScreen();
+    }
     $scope.modal = modal;
   });
 
@@ -42,11 +45,40 @@ function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionic
     };
 
     $cordovaCamera.getPicture(options).then(function(imageData) {
-      $scope.caseImage = "data:image/jpeg;base64," + imageData;
+      $scope.case.image = "data:image/jpeg;base64," + imageData;
     });
   };
 
-  var options = { timeout: 10000, enableHighAccuracy: true };
+  // Geolocation
+  var posOptions = {timeout: 10000, enableHighAccuracy: true};
+
+  var geocoder = new google.maps.Geocoder;
+
+  $scope.getLocation = function() {
+    $cordovaGeolocation
+      .getCurrentPosition(posOptions)
+      .then(function (position) {
+        var lat  = position.coords.latitude;
+        var long = position.coords.longitude;
+        $scope.case.lat = lat;
+        $scope.case.lng = long;
+
+        geocoder.geocode({'location': {'lat':lat, 'lng':long}}, function(results, status) {
+          if (results && results[1]) {
+            $scope.$apply(function() {
+              $scope.case.location = results[0].formatted_address;
+            });
+            $scope.map.setZoom(15);
+            var marker = new google.maps.Marker({
+              position: {'lat':lat, 'lng':long},
+              map: $scope.map,
+              animation: google.maps.Animation.DROP,
+              draggable: true
+            });
+          }
+      });
+    });
+  };
 
   var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
   var mapOptions = {

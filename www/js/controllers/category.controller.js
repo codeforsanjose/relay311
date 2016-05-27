@@ -5,9 +5,7 @@ function($scope, $ionicHistory, $ionicPlatform, API, NewRequest) {
 
   // ari: test api, will move this part to category picker
   $ionicPlatform.ready(function() {
-    console.log(API);
     API.getCategories(coords.lat, coords.lng).then(function(response) {
-      console.log(response);
       $scope.data = response.data;
     });
   });
@@ -16,7 +14,6 @@ function($scope, $ionicHistory, $ionicPlatform, API, NewRequest) {
     var requestObj = NewRequest.get();
     requestObj.category = category;
     NewRequest.set(requestObj);
-    console.log(requestObj);
 
     $ionicHistory.goBack();
   }

@@ -62,13 +62,22 @@ i.camera::before {
 .big {
     font-size: 30px;
 }
+
 .center {
     text-align: center;
 }
+
+.photo-header .title {
+    /* TODO @clarle - Will fix shortly */
+    left: 0 !important;
+    right: 0 !important;
+}
+
 .photo-view {
     opacity: 0.9;
     background-color: #387ef5;
 }
+
 .photo-view h2 {
     color: #ffffff;
 }

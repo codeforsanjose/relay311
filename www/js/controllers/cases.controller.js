@@ -5,7 +5,6 @@ function($scope, $ionicPlatform, $ionicLoading, API) {
 
   // same as document ready
   $ionicPlatform.ready(function() {
-    console.log('ready');
     $scope.haveData = false;
     $ionicLoading.show({
       template: 'Loading...'
@@ -24,8 +23,6 @@ function($scope, $ionicPlatform, $ionicLoading, API) {
         }
         return request;
       });
-
-      console.log(requests);
 
       $scope.haveData = true;
       $ionicLoading.hide();
