@@ -57,19 +57,19 @@ angular.module('open311.controllers', [])
   });
 }])
 
-.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', '$state', '$cordovaCamera', '$ionicModal',
-function($scope, $ionicPlatform, API, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
+.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'NewRequest', '$state', '$cordovaCamera', '$ionicModal',
+function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
 
   // dummy lat&lng, will replace by location of user's location
   var coords = { lat: 37.339244, lng: -121.883638 };
-  
+
+  $scope.case = NewRequest.get();
+
   $scope.goto = function(name) {
     $state.go('tabs.' + name);
   };
 
-  $scope.caseImage = 'img/default-placeholder.png';
-
-  // PhotoView Modal 
+  // PhotoView Modal
   $ionicModal.fromTemplateUrl('templates/photo-view.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -84,7 +84,7 @@ function($scope, $ionicPlatform, API, $state, $cordovaCamera, $ionicModal, $cord
     $scope.modal.hide();
   };
 
-  // Camera 
+  // Camera
   $scope.newPicture = function() {
     var options = {
       quality: 100,
@@ -114,11 +114,15 @@ function($scope, $ionicPlatform, API, $state, $cordovaCamera, $ionicModal, $cord
   };
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+  $scope.submit = function () {
+    console.log($scope.case);
+  }
+
 }])
 
-.controller('CategoryCtrl', ['$scope', '$ionicPlatform', 'API', function($scope, $ionicPlatform, API){
+.controller('CategoryCtrl', ['$scope', '$ionicHistory', '$ionicPlatform', 'API', 'NewRequest', function($scope, $ionicHistory, $ionicPlatform, API, NewRequest){
   var coords = { lat: 37.339244, lng: -121.883638 };
-  
+
   // ari: test api, will move this part to category picker
   $ionicPlatform.ready(function() {
     console.log(API);
@@ -127,5 +131,14 @@ function($scope, $ionicPlatform, API, $state, $cordovaCamera, $ionicModal, $cord
       $scope.data = response.data;
     });
   });
-  
+
+  $scope.selectItem = function (catName) {
+    var requestObj = NewRequest.get();
+    requestObj.category = catName;
+    NewRequest.set(requestObj);
+    console.log(requestObj);
+
+    $ionicHistory.goBack();
+  }
+
 }]);

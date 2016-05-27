@@ -1,4 +1,5 @@
 angular.module('open311.services', [])
+
 .factory('API', function($http, $httpParamSerializer, $q) {
 
   var SERVER_PATH = 'http://52.34.144.221:80/v1';
@@ -46,4 +47,20 @@ angular.module('open311.services', [])
     getCase: getCase,
     getCategories: getCategories
   };
-});
+})
+
+// Retaining new request object while editing
+  .factory('NewRequest', function () {
+    var object = {
+      'image': 'img/default-placeholder.png'
+    };
+
+    return {
+      get: function () {
+        return object;
+      },
+      set: function (obj) {
+        object = obj;
+      }
+    }
+  });
