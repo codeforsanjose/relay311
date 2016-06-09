@@ -49,25 +49,22 @@ angular.module('open311.services', [])
   };
 })
 
-// Retaining new request object while editing
-  .factory('NewRequest', function () {
-    var defaultObject = function () {
+// App level global variables
+  .factory('App', function () {
+    var defaultIssue = function () {
       return {
         'image': 'img/default-placeholder.png'
       }
     };
-    var object = defaultObject();
+
+    var issueObject;
 
     return {
-      get: function () {
-        return object;
+      getIssue: function () {
+        return issueObject || defaultIssue();
       },
-      getNew: function () {
-        obj = defaultObject();
-        return obj;
-      },
-      set: function (obj) {
-        object = obj;
+      setIssue: function (obj) {
+        issueObject = obj;
       }
     }
   });

@@ -1,11 +1,11 @@
 angular.module('open311.controllers')
-.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'NewRequest', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation',
-function($scope, $ionicPlatform, API, NewRequest, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
+.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'App', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation',
+function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
 
   // dummy lat&lng, will replace by location of user's location
   var coords = { lat: 37.339244, lng: -121.883638 };
 
-  $scope.case = NewRequest.get();
+  $scope.case = App.getIssue();
 
   $scope.goto = function(name) {
     $state.go('tabs.' + name);

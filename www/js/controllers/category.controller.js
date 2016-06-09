@@ -1,6 +1,6 @@
 angular.module('open311.controllers')
-.controller('CategoryCtrl', ['$scope', '$ionicHistory', '$ionicPlatform', 'API', 'NewRequest',
-function($scope, $ionicHistory, $ionicPlatform, API, NewRequest) {
+.controller('CategoryCtrl', ['$scope', '$ionicHistory', '$ionicPlatform', 'API', 'App',
+function($scope, $ionicHistory, $ionicPlatform, API, App) {
   var coords = { lat: 37.339244, lng: -121.883638 };
 
   // ari: test api, will move this part to category picker
@@ -13,7 +13,7 @@ function($scope, $ionicHistory, $ionicPlatform, API, NewRequest) {
   $scope.selectItem = function (category) {
     var requestObj = NewRequest.get();
     requestObj.category = category;
-    NewRequest.set(requestObj);
+    App.setIssue(requestObj);
 
     $ionicHistory.goBack();
   }
