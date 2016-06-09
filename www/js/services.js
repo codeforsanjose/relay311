@@ -43,8 +43,17 @@ angular.module('open311.services', [])
   };
 
   var postRequest = function (request) {
-    return $http.post(SERVER_PATH + '/requests.json', request).then(function (response) {
+    var config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    return $http.post(SERVER_PATH + '/requests.json', request, config).then(function successCallback(response) {
+      console.log('success', response);
       return response;
+    }, function failureCallback(response) {
+      console.log('error', response);
     });
   }
 
@@ -68,7 +77,10 @@ angular.module('open311.services', [])
 
     return {
       getIssue: function () {
-        return issueObject || defaultIssue();
+        if (!issueObject) {
+          issueObject = defaultIssue();
+        }
+        return issueObject;
       },
       setIssue: function (obj) {
         issueObject = obj;

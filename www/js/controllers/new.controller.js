@@ -91,14 +91,17 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
 
   // Post new request
   $scope.submit = function () {
+    // check validity
+    console.log('$scope.case', $scope.case);
+
     var issue = $scope.case;
 
     var params = {
-      "service_code": "CS1-SJ-1-20",
+      "service_code": (issue.category ? issue.category.service_code : null),
       "description": issue.description,
       "address_string": issue.location,
-      "lat": issue.lat,
-      "lng": issue.lng,
+      "lat": (issue.lat ? issue.lat.toString() : null),
+      "lng": (issue.lng ? issue.lng.toString() : null),
       "media_url": null,
       "email": "jameskhaskell@gmail.com",
       "device_id": "123456789",
@@ -107,8 +110,23 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       "phone": "4445556666",
       "isAnonymous": "true"
     };
-    
-    console.log(params);
-    API.postRequest(params);
+
+    // Ari note: debug payload
+    // params = {
+    //   "service_code": "CS1-SJ-1-20",
+    //   "address_string": "322 E Santa Clara St, San Jose, CA 95112",
+    //   "email": "jameskhaskell@gmail.com",
+    //   "device_id": "123456789",
+    //   "first_name": "James",
+    //   "last_name": "Haskell",
+    //   "phone": "4445556666",
+    //   "description": "Gang signs spray painted on the building.",
+    //   "isAnonymous": "true"
+    // };
+
+    console.log('params', params);
+    API.postRequest(params).then(function () {
+      // check success, if success, pop an alert and go back to home
+    });
   }
 }]);
