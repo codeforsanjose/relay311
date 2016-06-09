@@ -18,7 +18,10 @@ Clone the project.
 $ git clone https://github.com/codeforsanjose/sj311-ionic.git
 ```
 
-To run the project, cd into sj311-ionic folder. Then -
+Change to sj311-ionic folder, and install dependencies.
+```
+ionic state restore
+```
 
 To run as web project
 ```
@@ -26,11 +29,6 @@ $ ionic serve
 ```
 
 To run as mobile project, add mobile platforms accordingly and run it.
-```
-$ ionic platform add ios
-$ ionic platform add android
-```
-
 ```
 $ ionic run ios
 $ ionic run android
