@@ -1,6 +1,7 @@
 angular.module('open311.controllers')
 .controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'App', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation',
 function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
+  console.log('new request init');
 
   // dummy lat&lng, will replace by location of user's location
   var coords = { lat: 37.339244, lng: -121.883638 };
@@ -88,7 +89,26 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
   };
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+  // Post new request
   $scope.submit = function () {
-    console.log($scope.case);
+    var issue = $scope.case;
+
+    var params = {
+      "service_code": "CS1-SJ-1-20",
+      "description": issue.description,
+      "address_string": issue.location,
+      "lat": issue.lat,
+      "lng": issue.lng,
+      "media_url": null,
+      "email": "jameskhaskell@gmail.com",
+      "device_id": "123456789",
+      "first_name": "James",
+      "last_name": "Haskell",
+      "phone": "4445556666",
+      "isAnonymous": "true"
+    };
+    
+    console.log(params);
+    API.postRequest(params);
   }
 }]);

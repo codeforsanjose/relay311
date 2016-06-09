@@ -42,10 +42,17 @@ angular.module('open311.services', [])
     });
   };
 
+  var postRequest = function (request) {
+    return $http.post(SERVER_PATH + '/requests.json', request).then(function (response) {
+      return response;
+    });
+  }
+
   return {
     getRequests: getRequests,
     getCase: getCase,
-    getCategories: getCategories
+    getCategories: getCategories,
+    postRequest: postRequest
   };
 })
 
