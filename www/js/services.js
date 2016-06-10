@@ -42,25 +42,48 @@ angular.module('open311.services', [])
     });
   };
 
+  var postRequest = function (request) {
+    var config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    return $http.post(SERVER_PATH + '/requests.json', request, config).then(function successCallback(response) {
+      console.log('success', response);
+      return response;
+    }, function failureCallback(response) {
+      console.log('error', response);
+    });
+  }
+
   return {
     getRequests: getRequests,
     getCase: getCase,
-    getCategories: getCategories
+    getCategories: getCategories,
+    postRequest: postRequest
   };
 })
 
-// Retaining new request object while editing
-  .factory('NewRequest', function () {
-    var object = {
-      'image': 'img/default-placeholder.png'
+// App level global variables
+  .factory('App', function () {
+    var defaultIssue = function () {
+      return {
+        'image': 'img/default-placeholder.png'
+      }
     };
 
+    var issueObject;
+
     return {
-      get: function () {
-        return object;
+      getIssue: function () {
+        if (!issueObject) {
+          issueObject = defaultIssue();
+        }
+        return issueObject;
       },
-      set: function (obj) {
-        object = obj;
+      setIssue: function (obj) {
+        issueObject = obj;
       }
     }
   });
