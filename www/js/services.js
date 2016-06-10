@@ -16,8 +16,10 @@ angular.module('open311.services', [])
       .then(function(response) {
         recentCasesData = response.data;
         return response;
+      }, function(response) {
+        console.log('HTTP ERROR: ' + response.status + ' for ' + SERVER_PATH);
+        return response;
       });
-
   };
 
   var getCase = function(caseID) {

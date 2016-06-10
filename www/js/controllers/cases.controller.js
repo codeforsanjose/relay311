@@ -1,5 +1,5 @@
 angular.module('open311.controllers')
-.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', '$cordovaGeolocation', 'API', function ($scope, $ionicPlatform, $ionicLoading, $cordovaGeolocation, API) {
+.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', '$cordovaGeolocation', 'API', '$ionicPopup', function ($scope, $ionicPlatform, $ionicLoading, $cordovaGeolocation, API, $ionicPopup) {
 
 
     var positionHandler = function(position){
@@ -10,24 +10,40 @@ angular.module('open311.controllers')
 
       API.getRequests(position.coords.latitude, position.coords.longitude)
         .then(function(requests) {
-          var data = requests.data.map(function(request) {
-            console.log("Requests found:");    
-            console.log(JSON.stringify(requests));            
-              if (!request.media_url) {
-                  request.media_url = 'img/default-placeholder.png';
-              }
-              if (!request.service_name) {
-                  request.service_name = "Other";
-              }
-              if (!request.description) {
-                  request.description = "No description.";
-              }
-              return request;
-          });
-
-          $scope.haveData = true;
+          if(requests.status === 200) {
+            var data = requests.data.map(function(request) {
+                if (!request.media_url) {
+                    request.media_url = 'img/default-placeholder.png';
+                }
+                if (!request.service_name) {
+                    request.service_name = "Other";
+                }
+                if (!request.description) {
+                    request.description = "No description.";
+                }
+                return request;
+            });
+            if(data && data.length > 0){
+              $scope.haveData = true;
+            } else {
+              $ionicPopup.alert({
+                title: 'No data',
+                content: 'No records found!'
+              }).then(function(res) {
+                console.log('No records Alert Box');
+              });              
+            }
+            $scope.cases = data;               
+          } else {
+            //popup no data
+            $ionicPopup.alert({
+              title: 'Failed',
+              content: 'Couldn\'t fetch records!'
+            }).then(function(res) {
+              console.log('Service call failed Alert Box');
+            });
+          }
           $ionicLoading.hide();
-          $scope.cases = data; 
       });
     };
 
