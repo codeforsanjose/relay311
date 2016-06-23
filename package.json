@@ -21,7 +21,8 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
-    "org.apache.cordova.camera"
+    "cordova-plugin-camera",
+    "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": [
     "ios",

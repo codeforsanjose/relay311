@@ -1,32 +1,61 @@
 angular.module('open311.controllers')
-.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', 'API',
-function($scope, $ionicPlatform, $ionicLoading, API) {
-  var coords = { lat: 37.339244, lng: -121.883638 };
+.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', '$cordovaGeolocation', 'API', '$ionicPopup', function ($scope, $ionicPlatform, $ionicLoading, $cordovaGeolocation, API, $ionicPopup) {
 
-  // same as document ready
-  $ionicPlatform.ready(function() {
-    $scope.haveData = false;
-    $ionicLoading.show({
-      template: 'Loading...'
-    });
 
-    API.getRequests(coords.lat, coords.lng).then(function(requests) {
-      var data = requests.data.map(function(request) {
-        if (!request.media_url) {
-          request.media_url = 'img/default-placeholder.png';
-        }
-        if (!request.service_name) {
-          request.service_name = "Other";
-        }
-        if (!request.description) {
-          request.description = "No description.";
-        }
-        return request;
+    var positionHandler = function(position){
+      // var coords = {lat: 37.339244, lng: -121.883638};
+      console.log("Geo found:");    
+      console.log("lat = " + position.coords.latitude);
+      console.log("long = " + position.coords.longitude);
+
+      API.getRequests(position.coords.latitude, position.coords.longitude)
+        .then(function(requests) {
+          if(requests.status === 200) {
+            var data = requests.data.map(function(request) {
+                if (!request.media_url) {
+                    request.media_url = 'img/default-placeholder.png';
+                }
+                if (!request.service_name) {
+                    request.service_name = "Other";
+                }
+                if (!request.description) {
+                    request.description = "No description.";
+                }
+                return request;
+            });
+            if(data && data.length > 0){
+              $scope.haveData = true;
+            } else {
+              $ionicPopup.alert({
+                title: 'No data',
+                content: 'No records found!'
+              }).then(function(res) {
+                console.log('No records Alert Box');
+              });              
+            }
+            $scope.cases = data;               
+          } else {
+            //popup no data
+            $ionicPopup.alert({
+              title: 'Failed',
+              content: 'Couldn\'t fetch records!'
+            }).then(function(res) {
+              console.log('Service call failed Alert Box');
+            });
+          }
+          $ionicLoading.hide();
+      });
+    };
+
+    // same as document ready
+    $ionicPlatform.ready(function() {
+      $scope.haveData = false;
+      $ionicLoading.show ({
+        template: 'Loading...'
       });
 
-      $scope.haveData = true;
-      $ionicLoading.hide();
-      $scope.cases = data;
+      var positionOptions = {timeout: 10000, enableHighAccuracy: true};
+      $cordovaGeolocation.getCurrentPosition(positionOptions).then(positionHandler);
+
     });
-  });
 }])
