@@ -89,10 +89,30 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
   };
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+  function isFormValid() {
+    var issue = $scope.case;
+    var errMessage;
+
+    if (!issue.category) {
+      errMessage = 'Please select Service Type';
+    } else if (!issue.lat || !issue.lng) {
+      errMessage = 'Please select location';
+    }
+
+    if (errMessage) {
+      alert(errMessage);
+      return false;
+    }
+    return true;
+  }
+
   // Post new request
   $scope.submit = function () {
     // check validity
-    console.log('$scope.case', $scope.case);
+    if (!isFormValid()) {
+      alert($scope.case);
+      return;
+    }
 
     var issue = $scope.case;
 
