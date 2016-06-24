@@ -91,14 +91,15 @@ i.camera::before {
     position: relative;
     background-color: #387ef5;
     color: white;
+    font-size: 18px;
 }
 
-.missing-bar {
-    text-align: center;
+.msg-404 {
+    margin:0 auto;
 }
 
-p {
-    margin: 0 0 0 0;
-}
+
+
+
 
 
