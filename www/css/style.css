@@ -86,3 +86,19 @@ i.camera::before {
     height: 300px;
     width: 100%;
 }
+
+.missing-bar {
+    position: relative;
+    background-color: #387ef5;
+    color: white;
+}
+
+.missing-bar {
+    text-align: center;
+}
+
+p {
+    margin: 0 0 0 0;
+}
+
+
