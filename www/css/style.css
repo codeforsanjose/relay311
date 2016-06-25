@@ -87,15 +87,11 @@ i.camera::before {
     width: 100%;
 }
 
-.missing-bar {
-    position: relative;
-    background-color: #387ef5;
-    color: white;
-    font-size: 18px;
-}
-
 .msg-404 {
-    margin:0 auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: center;
 }
 
 

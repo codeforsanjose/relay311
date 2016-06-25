@@ -83,6 +83,15 @@ angular.module('open311', [
           controller: "CalendarCtrl"
         }
       }
+    })
+    .state('tabs.discussion', {
+      url: "/discussion",
+      views: {
+        'home-tab': {
+          templateUrl: "templates/404.html",
+          controller: "DiscussionCtrl"
+        }
+      }
     });
 
    $urlRouterProvider.otherwise("/tab/home");
