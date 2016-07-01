@@ -18,7 +18,7 @@ function($scope, $ionicHistory, $ionicPlatform, API, App) {
   $scope.searchList = function (ev) {
     var items = data;
     var val = ev.target.value;
-    $scope.filteredItems = items.filter(function(item) {
+    $scope.filteredData = items.filter(function(item) {
         var selection = item.service_name.toLowerCase();
         return (_.startsWith(selection, val));
     });   
