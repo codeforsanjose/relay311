@@ -7,3 +7,4 @@ plugins/
 
 .DS_Store
 .idea
+.brackets.json

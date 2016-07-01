@@ -1,14 +1,19 @@
 <ion-view view-title="Categories">
-  <ion-content class="padding">
+    <ion-content class="padding">
 
-    <ion-searchbar ng-model="searchText">
-    </ion-searchbar>
+    <ion-header-bar class="bar bar-subheader item-input-inset"> 
+        <label class="item-input-wrapper search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input placeholder="Search..." ng-keyup="searchList($event)" type="text"> 
+        </label>
+    </ion-header-bar><br><br><br>
+
 
     <ion-list>
-      <ion-item ng-repeat="item in data" ng-click="selectItem(item)">
+      <ion-item ng-repeat="item in filteredData" ng-click="selectItem(item)">
         {{item.service_name}}
       </ion-item>
     </ion-list>
 
-  </ion-content>
+    </ion-content>
 </ion-view>
