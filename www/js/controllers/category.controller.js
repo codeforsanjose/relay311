@@ -27,43 +27,9 @@ function($scope, $ionicHistory, $ionicPlatform, API, App) {
   $scope.selectItem = function (category) {
     var requestObj = App.getIssue();
     requestObj.category = category;
-    console.log(category);
-    App.setIssue(requestObj);
-    console.log(App.setIssue(requestObj));    
+    App.setIssue(requestObj);   
     $ionicHistory.goBack();
   }
-
-
-
-
-  // function searchPage() {
-  //   this.searchQuery = '';
-  //   this.initializeItems();
-  // }
-
-  // searchPage.prototype.initializeItems = function() {
-  //   this.items = [
-  //     'Angular 1.x',
-  //     'Angular 2',
-  //     'ReactJS',
-  //     'EmberJS',
-  //     'Meteor',
-  //     'Typescript',
-  //     'Dart',
-  //     'CoffeeScript'
-  //   ];
-  // }
-
-  // searchPage.prototype.getItems = function(ev){
-  //   this.initializeItems();
-  //   let val = ev.target.value;
-    
-  //   if (val && val.trim() != '') {
-  //       this.items = this.items.filter((item) => {
-  //         return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
-  //       })
-  //     }
-  // }
 
 }]);
  
