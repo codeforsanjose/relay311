@@ -111,8 +111,10 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       if (results[0]) {
         $scope.map.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
+            map: $scope.map,
+            position: results[0].geometry.location,
+            animation: google.maps.Animation.DROP,
+            draggable: true
         });
       }
     })
