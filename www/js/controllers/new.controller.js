@@ -1,7 +1,7 @@
 angular.module('open311.controllers')
 .controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'App', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation',
 function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
-  console.log('new request init');
+  // console.log('new request init');
 
   // dummy lat&lng, will replace by location of user's location
   var coords = { lat: 37.339244, lng: -121.883638 };
@@ -69,29 +69,11 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     $scope.modal2.hide();
   };
 
-  // $scope.place = {};
-  //
-  //  $scope.search = function() {
-  //      $scope.apiError = false;
-  //      API.search($scope.searchPlace)
-  //      .then(
-  //          function(res) { // success
-  //              API.addMarker(res);
-  //              $scope.place.name = res.name;
-  //              $scope.place.lat = res.geometry.location.lat();
-  //              $scope.place.lng = res.geometry.location.lng();
-  //          },
-  //          function(status) { // error
-  //              $scope.apiError = true;
-  //              $scope.apiStatus = status;
-  //          }
-  //      );
-  //  }
-
   // Geolocation
   var posOptions = {timeout: 10000, enableHighAccuracy: true};
 
   var geocoder = new google.maps.Geocoder;
+  var infowindow = new google.maps.InfoWindow;
 
   $scope.getLocation = function() {
     $cordovaGeolocation
@@ -99,12 +81,12 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       .then(function (position) {
         var lat  = position.coords.latitude;
         var long = position.coords.longitude;
-        $scope.case.lat = lat;
-        $scope.case.lng = long;
+        // $scope.case.lat = lat;
+        // $scope.case.lng = long;
 
         geocoder.geocode({'location': {'lat':lat, 'lng':long}}, function(results, status) {
-          console.log(results);
-          console.log(status);
+          // console.log(results);
+          // console.log(status);
           if (results && results[1]) {
             $scope.$apply(function() {
               $scope.case.location = results[0].formatted_address;
@@ -116,17 +98,34 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
               animation: google.maps.Animation.DROP,
               draggable: true
             });
+            infowindow.setContent(results[1].formatted_address);
+            infowindow.open($scope.map, marker);
           }
       });
     });
   };
+
+  $scope.setLocation = function (address) {
+    $scope.modal2.hide();
+    geocoder.geocode({'address': address}, function (results, status) {
+      if (results[0]) {
+        $scope.map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      }
+    })
+  }
 
 
   var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
   var mapOptions = {
     center: latLng,
     zoom: 15,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    disableDefaultUI: true,
+    zoomControl: true
   };
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
