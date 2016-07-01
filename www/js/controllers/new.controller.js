@@ -50,6 +50,44 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     });
   };
 
+  // Location Modal
+  $ionicModal.fromTemplateUrl('templates/location-view.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    if (ionic.Platform.isIOS()) {
+      ionic.Platform.fullScreen();
+    }
+    $scope.modal2 = modal;
+  });
+
+  $scope.openLocation = function() {
+    $scope.modal2.show();
+  };
+
+  $scope.closeLocation = function() {
+    $scope.modal2.hide();
+  };
+
+  // $scope.place = {};
+  //
+  //  $scope.search = function() {
+  //      $scope.apiError = false;
+  //      API.search($scope.searchPlace)
+  //      .then(
+  //          function(res) { // success
+  //              API.addMarker(res);
+  //              $scope.place.name = res.name;
+  //              $scope.place.lat = res.geometry.location.lat();
+  //              $scope.place.lng = res.geometry.location.lng();
+  //          },
+  //          function(status) { // error
+  //              $scope.apiError = true;
+  //              $scope.apiStatus = status;
+  //          }
+  //      );
+  //  }
+
   // Geolocation
   var posOptions = {timeout: 10000, enableHighAccuracy: true};
 
@@ -65,6 +103,8 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
         $scope.case.lng = long;
 
         geocoder.geocode({'location': {'lat':lat, 'lng':long}}, function(results, status) {
+          console.log(results);
+          console.log(status);
           if (results && results[1]) {
             $scope.$apply(function() {
               $scope.case.location = results[0].formatted_address;
@@ -80,6 +120,7 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       });
     });
   };
+
 
   var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
   var mapOptions = {
