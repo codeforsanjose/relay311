@@ -1,6 +1,6 @@
 angular.module('open311.controllers')
-.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'App', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation',
-function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation) {
+.controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'App', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation', '$ionicPopup',
+function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation, $ionicPopup) {
   console.log('new request init');
 
   // dummy lat&lng, will replace by location of user's location
@@ -9,7 +9,7 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
   $scope.case = App.getIssue();
 
   $scope.goto = function(name) {
-    $state.go('tabs.' + name);
+    $state.go('tabs.' + name);  
   };
 
   // PhotoView Modal
@@ -89,18 +89,40 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
   };
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-  function isFormValid() {
-    var issue = $scope.case;
-    var errMessage;
+  var popup = function(heading, userMsg, logMsg, nextState) {
+    $ionicPopup.alert({
+      title: heading,
+      content: userMsg
+    }).then(function(res) {
+      console.log(logMsg);
+      if(nextState){
+        $state.go(nextState);
+      }
+    }); 
+  };
+
+  function isFormValid(issue) {
+    var errMessages = [];
 
     if (!issue.category) {
-      errMessage = 'Please select Service Type';
-    } else if (!issue.lat || !issue.lng) {
-      errMessage = 'Please select location';
+      errMessages.push('Please select Service Type');
     }
 
-    if (errMessage) {
-      alert(errMessage);
+    if (!issue.lat || !issue.lng) {
+      errMessages.push('Please select location');
+    }
+
+    if(!issue.title) {
+      errMessages.push('Please add title');
+    }
+
+    if(issue.category && issue.category.service_name.search(/describe/i) !== -1) {
+      errMessages.push('Please add description');
+    }
+
+    if (errMessages.length > 0) {
+      var userMsg = errMessages.join('<br>');
+      popup('Missing inputs:', userMsg, userMsg);
       return false;
     }
     return true;
@@ -109,19 +131,18 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
   // Post new request
   $scope.submit = function () {
     // check validity
-    if (!isFormValid()) {
-      alert($scope.case);
+    if (!isFormValid($scope.case)) {
       return;
     }
-
     var issue = $scope.case;
 
     var params = {
-      "service_code": (issue.category ? issue.category.service_code : null),
+      "service_code": issue.category.service_code,
+      "title": issue.title,
       "description": issue.description,
       "address_string": issue.location,
-      "lat": (issue.lat ? issue.lat.toString() : null),
-      "lng": (issue.lng ? issue.lng.toString() : null),
+      "lat": issue.lat.toString(),
+      "lng": issue.lng.toString(),
       "media_url": null,
       "email": "jameskhaskell@gmail.com",
       "device_id": "123456789",
@@ -147,6 +168,8 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     console.log('params', params);
     API.postRequest(params).then(function () {
       // check success, if success, pop an alert and go back to home
+      popup('New request submitted', params.title, params, 'tabs.home');
+
     });
   }
 }]);
