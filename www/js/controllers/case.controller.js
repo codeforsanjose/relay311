@@ -1,5 +1,5 @@
 angular.module('open311.controllers')
-.controller('RecentCaseCtrl', ['$scope', '$ionicPlatform', '$stateParams', 'API', function($scope, $stateParams, API) {
+.controller('RecentCaseCtrl', ['$scope', '$ionicPlatform', '$stateParams', 'API', function($scope, $ionicPlatform, $stateParams, API) {
   API.getCase($stateParams.caseId).then(function(request) {
     if (!request.media_url) {
       request.media_url = 'img/default-placeholder.png';
