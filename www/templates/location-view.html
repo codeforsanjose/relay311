@@ -1,0 +1,26 @@
+<ion-modal-view class="location-view">
+  <ion-header-bar>
+      <div class="photo-header bar bar-header bar-positive">
+        <h1 class="title">Location</h1>
+      </div>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <div class="list">
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+      <input type="text" placeholder="Location" ng-model="case.location">
+    </label>
+    <button class="button button-small button-balanced" ng-click="setLocation(case.location)">
+      submit
+    </button>
+  </div>
+
+</div>
+    </div>
+
+    <div class="item">
+      <button class="button button-assertive button-block" ng-click="closeLocation()">Close</button>
+    </div>
+  </ion-content>
+
+</ion-modal-view>
