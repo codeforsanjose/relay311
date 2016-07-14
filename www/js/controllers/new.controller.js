@@ -6,6 +6,10 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
   // dummy lat&lng, will replace by location of user's location
   var coords = { lat: 37.339244, lng: -121.883638 };
 
+  $scope.$on('$ionicView.enter', function(e) {
+    $ionicNavBarDelegate.showBar(true);
+  });
+
   $scope.case = App.getIssue();
 
   $scope.goto = function(name) {
