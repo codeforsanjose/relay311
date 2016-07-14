@@ -1,4 +1,5 @@
 angular.module('open311.controllers')
+
 .controller('NewRequestCtrl', ['$scope', '$ionicPlatform', 'API', 'App', '$state', '$cordovaCamera', '$ionicModal', '$cordovaGeolocation', '$ionicPopup',
 function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation, $ionicPopup) {
   console.log('new request init');
@@ -9,7 +10,7 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
   $scope.case = App.getIssue();
 
   $scope.goto = function(name) {
-    $state.go('tabs.' + name);  
+    $state.go('tabs.' + name);
   };
 
   // PhotoView Modal
@@ -50,10 +51,30 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     });
   };
 
+  // Location Modal
+  $ionicModal.fromTemplateUrl('templates/location-view.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    if (ionic.Platform.isIOS()) {
+      ionic.Platform.fullScreen();
+    }
+    $scope.modal2 = modal;
+  });
+
+  $scope.openLocation = function() {
+    $scope.modal2.show();
+  };
+
+  $scope.closeLocation = function() {
+    $scope.modal2.hide();
+  };
+
   // Geolocation
   var posOptions = {timeout: 10000, enableHighAccuracy: true};
 
   var geocoder = new google.maps.Geocoder;
+  var infowindow = new google.maps.InfoWindow;
 
   $scope.getLocation = function() {
     $cordovaGeolocation
@@ -61,10 +82,12 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       .then(function (position) {
         var lat  = position.coords.latitude;
         var long = position.coords.longitude;
-        $scope.case.lat = lat;
-        $scope.case.lng = long;
+        // $scope.case.lat = lat;
+        // $scope.case.lng = long;
 
         geocoder.geocode({'location': {'lat':lat, 'lng':long}}, function(results, status) {
+          // console.log(results);
+          // console.log(status);
           if (results && results[1]) {
             $scope.$apply(function() {
               $scope.case.location = results[0].formatted_address;
@@ -76,16 +99,36 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
               animation: google.maps.Animation.DROP,
               draggable: true
             });
+            infowindow.setContent(results[1].formatted_address);
+            infowindow.open($scope.map, marker);
           }
       });
     });
   };
 
+  $scope.setLocation = function (address) {
+    $scope.modal2.hide();
+    geocoder.geocode({'address': address}, function (results, status) {
+      if (results[0]) {
+        $scope.map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: $scope.map,
+            position: results[0].geometry.location,
+            animation: google.maps.Animation.DROP,
+            draggable: true
+        });
+      }
+    })
+  }
+
+
   var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
   var mapOptions = {
     center: latLng,
     zoom: 15,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    disableDefaultUI: true,
+    zoomControl: true
   };
   $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
@@ -98,7 +141,7 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       if(nextState){
         $state.go(nextState);
       }
-    }); 
+    });
   };
 
   function isFormValid(issue) {
