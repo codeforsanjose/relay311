@@ -1,7 +1,7 @@
 # About San Jose Open 311 Ionic
 [![Stories in Ready](https://badge.waffle.io/codeforsanjose/sj311-ionic.png?label=ready&title=Ready)](http://waffle.io/codeforsanjose/sj311-ionic)
 
-This project is related to Open 311 San Jose (https://github.com/codeforsanjose/open311-plan-for-san-jose).  SJ 311 is a public issue tagging app.  The SJ 311 Ionic project is developed with Ionic and to run on iOS and Android.
+This project is related to [Open 311 San Jose](https://github.com/codeforsanjose/open311-plan-for-san-jose).  SJ 311 is a public issue tagging app.  The SJ 311 Ionic project is developed with Ionic and to run on iOS and Android.
 
 ## Getting started
 
