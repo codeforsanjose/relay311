@@ -74,24 +74,6 @@ angular.module('open311', [
           controller: "CategoryCtrl"
         }
       }
-    })
-    .state('tabs.calendar', {
-      url: "/calendar",
-      views: {
-        'home-tab': {
-          templateUrl: "templates/404.html",
-          controller: "CalendarCtrl"
-        }
-      }
-    })
-    .state('tabs.discussion', {
-      url: "/discussion",
-      views: {
-        'home-tab': {
-          templateUrl: "templates/404.html",
-          controller: "DiscussionCtrl"
-        }
-      }
     });
 
    $urlRouterProvider.otherwise("/tab/home");

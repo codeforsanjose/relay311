@@ -32,8 +32,6 @@
     <script src="js/controllers/case.controller.js"></script>
     <script src="js/controllers/new.controller.js"></script>
     <script src="js/controllers/category.controller.js"></script>
-    <script src="js/controllers/calendar.controller.js"></script>
-    <script src="js/controllers/discussion.controller.js"></script>
     <script src="js/services.js"></script>
 
   </head>
@@ -63,7 +61,7 @@
     </script>
 
     <script id="templates/home.html" type="text/ng-template">
-        <ion-view class="home" view-title="San Jose 311">
+        <ion-view class="home" view-title="Relay311">
         <ion-content class="padding">
             <div class="circle-row">
                 <div class="circle-container">
@@ -91,20 +89,6 @@
                         <i class="icon ion-person"></i>
                     </div>
                     <span class="btn-title">Account</span>
-                </div>
-            </div>
-            <div class="circle-row">
-                <div class="circle-container">
-                    <div ng-click="onClick('calendar')" class="circle">
-                        <i class="icon ion-calendar"></i>
-                    </div>
-                    <span class="btn-title">Calendar</span>
-                </div>
-                <div class="circle-container">
-                    <div ng-click="onClick('discussion')" class="circle">
-                        <i class="icon ion-chatboxes"></i>
-                    </div>
-                    <span class="btn-title">Discussion</span>
                 </div>
             </div>
         </ion-content>
