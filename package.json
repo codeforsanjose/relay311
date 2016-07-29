@@ -1,7 +1,7 @@
 {
-  "name": "sj311",
+  "name": "Relay311",
   "version": "1.1.1",
-  "description": "SJ311: An Ionic project",
+  "description": "Relay311: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
