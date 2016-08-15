@@ -49,6 +49,8 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     $cordovaCamera.getPicture(options).then(function(imageData) {
       $scope.case.image = "data:image/jpeg;base64," + imageData;
     });
+
+    $scope.modal.hide();
   };
 
   // Location Modal
