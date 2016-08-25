@@ -7,7 +7,7 @@
 
   <ion-content>
 
-    <div class="list card">
+    <div class="list card new-request-form">
 
       <div class="item-image">
         <a ng-click="openPhotoView()" >
@@ -15,7 +15,7 @@
         </a>
       </div>
 
-      <div id="new-request-category" class="item item-icon-right" ng-click="goto('categories')">
+      <div class="item item-icon-right" ng-click="goto('categories')">
         Service Type
         <div class="text">{{case.category.service_name}}</div>
         <i class="icon ion-chevron-right icon-accessory"></i>
@@ -31,18 +31,11 @@
         <textarea placeholder="Description" rows="3" ng-model="case.description"></textarea>
       </div>
 
-      <div class="item item-body">
-        <div class="row">
-          <div class="col col-75">
-            <input class="addressInput" placeholder="Location" ng-model="case.location" ng-click="openLocation()">
-          </div>
-          <div class="col col-25">
-            <button class="button button-stable button-outline" ng-click="getLocation()">
-              <i class="icon ion-ios-location-outline icon-accessory"></i>
-            </button>
-          </div>
-        </div>
-        <div id="map" data-tap-disabled="true"></div>
+      <div class="item item-icon-right" ng-click="openLocation()">
+        Location
+        <div class="text" placeholder="Location" >{{case.location}}</div>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        <!--<div id="map" data-tap-disabled="true"></div>-->
       </div>
     </div>
 
