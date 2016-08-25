@@ -9,49 +9,37 @@
 
     <div class="list card">
 
-      <div class="item">
-        <div class="row">
-          <div class="col-25 frame">
-            <a ng-click="openPhotoView()" class="item">
-              <img ng-src="{{case.image}}" alt="">
-            </a>
-          </div>
-        </div>
+      <div class="item-image">
+        <a ng-click="openPhotoView()" >
+          <img ng-src="{{case.image}}" alt="">
+        </a>
       </div>
 
-      <div class="item">
-        <div class="item item-icon-right" ng-click="goto('categories')">
-          <label class="input-label">Service Type</label>
-          <label>{{case.category.service_name || 'Select a service type'}}</label>
-          <i class="icon ion-chevron-right icon-accessory"></i>
-        </div>
+      <div id="new-request-category" class="item item-icon-right" ng-click="goto('categories')">
+        Service Type
+        <div class="text">{{case.category.service_name}}</div>
+        <i class="icon ion-chevron-right icon-accessory"></i>
       </div>
 
-      <div class="item">
-        <label class="item item-input item-stacked-label">
-          <label class="input-label">Title</label>
-          <input type="text" placeholder="Title" ng-model="case.title" maxlength="256"></input>
-        </label>
+      <div class="item item-input item-stacked-label">
+        <label class="input-label">Title</label>
+        <input type="text" placeholder="Title" ng-model="case.title" maxlength="256" />
       </div>
 
-      <div class="item">
-        <label class="item item-input item-stacked-label">
-          <label class="input-label">Description</label>
-          <textarea placeholder="Description" rows="3" ng-model="case.description"></textarea>
-        </label>
+      <div class="item item-input item-stacked-label">
+        <label class="input-label">Description</label>
+        <textarea placeholder="Description" rows="3" ng-model="case.description"></textarea>
       </div>
 
       <div class="item item-body">
-        <div class="item">
-          <div class="row">
-            <div class="col col-75">
-              <input class="addressInput" placeholder="Location" ng-model="case.location" ng-click="openLocation()">
-            </div>
-            <div class="col col-25">
-              <button class="button button-stable button-outline" ng-click="getLocation()">
-                <i class="icon ion-ios-location-outline icon-accessory"></i>
-              </button>
-            </div>
+        <div class="row">
+          <div class="col col-75">
+            <input class="addressInput" placeholder="Location" ng-model="case.location" ng-click="openLocation()">
+          </div>
+          <div class="col col-25">
+            <button class="button button-stable button-outline" ng-click="getLocation()">
+              <i class="icon ion-ios-location-outline icon-accessory"></i>
+            </button>
           </div>
         </div>
         <div id="map" data-tap-disabled="true"></div>
