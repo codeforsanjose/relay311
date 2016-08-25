@@ -20,14 +20,14 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     if (ionic.Platform.isIOS()) {
       ionic.Platform.fullScreen();
     }
-    $scope.modal = modal;
+    $scope.cameraModel = modal;
   });
 
   $scope.openPhotoView = function() {
-    $scope.modal.show();
+    $scope.cameraModel.show();
   };
   $scope.closePhotoView = function() {
-    $scope.modal.hide();
+    $scope.cameraModel.hide();
   };
 
   // Camera
