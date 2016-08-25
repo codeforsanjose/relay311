@@ -94,7 +94,10 @@ i.camera::before {
     text-align: center;
 }
 
-
+.new-request-form .text {
+  padding-top: 5px;
+  font-size: 14px;
+}
 
 
 

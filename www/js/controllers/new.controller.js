@@ -4,16 +4,15 @@ angular.module('open311.controllers')
 function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, $cordovaGeolocation, $ionicPopup) {
   console.log('new request init');
 
-  // dummy lat&lng, will replace by location of user's location
-  var coords = { lat: 37.339244, lng: -121.883638 };
-
+  // Initialize new issue
+  App.setIssue(null);
   $scope.case = App.getIssue();
 
-  $scope.goto = function(name) {
-    $state.go('tabs.' + name);
-  };
 
-  // PhotoView Modal
+  /***
+  * Camera logic
+  ***/
+
   $ionicModal.fromTemplateUrl('templates/photo-view.html', {
     scope: $scope,
     animation: 'slide-in-up'
@@ -21,14 +20,14 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     if (ionic.Platform.isIOS()) {
       ionic.Platform.fullScreen();
     }
-    $scope.modal = modal;
+    $scope.cameraModel = modal;
   });
 
   $scope.openPhotoView = function() {
-    $scope.modal.show();
+    $scope.cameraModel.show();
   };
   $scope.closePhotoView = function() {
-    $scope.modal.hide();
+    $scope.cameraModel.hide();
   };
 
   // Camera
@@ -50,8 +49,13 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       $scope.case.image = "data:image/jpeg;base64," + imageData;
     });
 
-    $scope.modal.hide();
+    $scope.closePhotoView();
   };
+
+
+  /***
+   * Map viewer logic
+   ***/
 
   // Location Modal
   $ionicModal.fromTemplateUrl('templates/location-view.html', {
@@ -61,17 +65,20 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     if (ionic.Platform.isIOS()) {
       ionic.Platform.fullScreen();
     }
-    $scope.modal2 = modal;
+    $scope.mapModel = modal;
   });
 
   $scope.openLocation = function() {
-    $scope.modal2.show();
+    $scope.mapModel.show();
   };
 
   $scope.closeLocation = function() {
-    $scope.modal2.hide();
+    $scope.mapModel.hide();
   };
 
+  //Ari comment on 2016.8.25
+  //Will move map to the map viewer
+  /*
   // Geolocation
   var posOptions = {timeout: 10000, enableHighAccuracy: true};
 
@@ -104,7 +111,8 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
             infowindow.setContent(results[1].formatted_address);
             infowindow.open($scope.map, marker);
           }
-      });
+        });
+
     });
   };
 
@@ -122,56 +130,68 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       }
     })
   }
+  */
+
+  // var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
+  // var mapOptions = {
+  //   center: latLng,
+  //   zoom: 15,
+  //   mapTypeId: google.maps.MapTypeId.ROADMAP,
+  //   disableDefaultUI: true,
+  //   zoomControl: true
+  // };
+  // $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 
-  var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
-  var mapOptions = {
-    center: latLng,
-    zoom: 15,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    disableDefaultUI: true,
-    zoomControl: true
-  };
-  $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  /***
+   * Internal functions
+   * */
 
   var popup = function(heading, userMsg, logMsg, nextState) {
     $ionicPopup.alert({
       title: heading,
       content: userMsg
     }).then(function(res) {
+
       console.log(logMsg);
       if(nextState){
         $state.go(nextState);
       }
+
     });
   };
 
   function isFormValid(issue) {
     var errMessages = [];
 
-    if (!issue.category) {
+    if ( !issue.category ) {
       errMessages.push('Please select Service Type');
     }
 
-    if (!issue.lat || !issue.lng) {
+    if ( (!issue.lat || !issue.lng) ) {
       errMessages.push('Please select location');
     }
 
-    if(!issue.title) {
+    if( !issue.title ) {
       errMessages.push('Please add title');
     }
 
-    if(issue.category && issue.category.service_name.search(/describe/i) !== -1) {
+    if( issue.category && issue.category.service_name.search(/describe/i) !== -1 ) {
       errMessages.push('Please add description');
     }
 
-    if (errMessages.length > 0) {
+    if ( errMessages.length > 0 ) {
       var userMsg = errMessages.join('<br>');
       popup('Missing inputs:', userMsg, userMsg);
       return false;
     }
+
     return true;
   }
+
+  $scope.goto = function(name) {
+    $state.go('tabs.' + name);
+  };
 
   // Post new request
   $scope.submit = function () {
@@ -186,8 +206,8 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       "title": issue.title,
       "description": issue.description,
       "address_string": issue.location,
-      "lat": issue.lat.toString(),
-      "lng": issue.lng.toString(),
+      "lat": (issue.lat ? issue.lat.toString() : null),
+      "lng": (issue.lng ? issue.lng.toString() : null),
       "media_url": null,
       "email": "jameskhaskell@gmail.com",
       "device_id": "123456789",
