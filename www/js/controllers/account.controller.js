@@ -1,14 +1,24 @@
 angular.module('open311.controllers')
-.controller('AccountCtrl', ['$scope', '$ionicHistory', '$ionicPlatform', 'API', 'App',
-function($scope, $ionicHistory, $ionicPlatform, API, App) {
+.controller('AccountCtrl', ['$scope', '$ionicHistory', '$ionicPlatform', '$localStorage', 'API', 'App',
+function($scope, $ionicHistory, $ionicPlatform, $localStorage, API, App) {
 
 
   $ionicPlatform.ready(function() {
-    $scope.account = {};
+    if ($localStorage.account === undefined) {
+      $scope.account = {};
+    } else {
+      $scope.account = $localStorage.account;
+    }
   });
 
-  $scope.submit = function () {
+  $scope.saveAccount = function () {
     console.log($scope.account);
+    $localStorage.account = $scope.account;
+  };
+
+  $scope.clearAccount = function () {
+    $scope.account = {};
+    delete $localStorage.account;
   };
 
 }]);

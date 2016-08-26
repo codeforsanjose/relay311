@@ -1,7 +1,7 @@
 <ion-view view-title="Account">
   <ion-nav-buttons side="right">
-    <button class="button" ng-click="submit()">
-      Search
+    <button class="button" ng-click="saveAccount()">
+      Save
     </button>
   </ion-nav-buttons>
 
@@ -25,6 +25,10 @@
     <div class="item item-input item-stacked-label">
       <label class="input-label">Phone</label>
       <input type="tel" placeholder="Phone" ng-model="account.phone" maxlength="256" />
+    </div>
+
+    <div class="padding">
+      <button class="button button-block button-calm" ng-click="clearAccount()">Clear My Account</button>
     </div>
 
     <p class="padding">Please enter your info so that we may cater the cases specific to you. Promise we won't spam you! :)</p>
