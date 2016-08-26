@@ -62,7 +62,8 @@ angular.module('open311', [
       url: "/account",
       views: {
         'home-tab': {
-          templateUrl: "templates/account.html"
+          templateUrl: "templates/account.html",
+          controller: 'AccountCtrl'
         }
       }
     })

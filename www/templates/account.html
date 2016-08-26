@@ -1,14 +1,33 @@
 <ion-view view-title="Account">
-<ion-content class="padding">
-    <h1>Account Page</h1>
-    <p>Banging your head against a wall uses 150 calories an hour.</p>
-    <p>Dogs have four toes on their hind feet, and five on their front feet.</p>
-    <p>The ant can lift 50 times its own weight, can pull 30 times its own weight and always falls over on its right side when intoxicated.</p>
-    <p>A cockroach will live nine days without it's head, before it starves to death.</p>
-    <p>Polar bears are left handed.</p>
-    <p>
-    <a class="button icon ion-home" href="#/tab/home"> Home</a>
-    <a class="button icon icon-right ion-chevron-right" href="#/tab/facts2">More Facts</a>
-    </p>
-</ion-content>
+  <ion-nav-buttons side="right">
+    <button class="button" ng-click="submit()">
+      Search
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <div class="item item-input item-stacked-label">
+      <label class="input-label">First Name</label>
+      <input type="text" placeholder="First" ng-model="account.firstName" maxlength="256" />
+    </div>
+
+    <div class="item item-input item-stacked-label">
+      <label class="input-label">Last Name</label>
+      <input type="text" placeholder="Last" ng-model="account.lastName" maxlength="256" />
+    </div>
+    
+    <div class="item item-input item-stacked-label">
+      <label class="input-label">Email</label>
+      <input type="email" placeholder="Email" ng-model="account.email" maxlength="256" />
+    </div>
+
+    <div class="item item-input item-stacked-label">
+      <label class="input-label">Phone</label>
+      <input type="tel" placeholder="Phone" ng-model="account.phone" maxlength="256" />
+    </div>
+
+    <p class="padding">Please enter your info so that we may cater the cases specific to you. Promise we won't spam you! :)</p>
+
+  </ion-content>
 </ion-view>
