@@ -18,6 +18,7 @@
     <!-- ngCordova -->
     <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
     <script src="lib/lodash/dist/lodash.min.js"></script>
+    <script src="lib/ngstorage/ngStorage.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -32,6 +33,7 @@
     <script src="js/controllers/case.controller.js"></script>
     <script src="js/controllers/new.controller.js"></script>
     <script src="js/controllers/category.controller.js"></script>
+    <script src="js/controllers/account.controller.js"></script>
     <script src="js/services.js"></script>
 
   </head>
@@ -58,41 +60,6 @@
         </ion-tab>
 
         </ion-tabs>
-    </script>
-
-    <script id="templates/home.html" type="text/ng-template">
-        <ion-view class="home" view-title="Relay311">
-        <ion-content class="padding">
-            <div class="circle-row">
-                <div class="circle-container">
-                    <div ng-click="onClick('new')" class="circle">
-                        <i class="icon ion-archive"></i>
-                    </div>
-                    <span class="btn-title">New Request</span>
-                </div>
-                <div class="circle-container">
-                    <div ng-click="onClick('recent')" class="circle">
-                        <i class="icon ion-email-unread"></i>
-                    </div>
-                    <span class="btn-title">Recent</span>
-                </div>
-            </div>
-            <div class="circle-row">
-                <div class="circle-container">
-                    <div ng-click="onClick('mine')" class="circle">
-                        <i class="icon ion-shuffle"></i>
-                    </div>
-                    <span class="btn-title">My Requests</span>
-                </div>
-                <div class="circle-container">
-                    <div ng-click="onClick('account')" class="circle">
-                        <i class="icon ion-person"></i>
-                    </div>
-                    <span class="btn-title">Account</span>
-                </div>
-            </div>
-        </ion-content>
-        </ion-view>
     </script>
 
     <script id="templates/facts2.html" type="text/ng-template">
