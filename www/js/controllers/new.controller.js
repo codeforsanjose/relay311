@@ -72,16 +72,7 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
     $scope.mapModel.show();
 
     $scope.getLocation();
-    // var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
-    // var mapOptions = {
-    //   center: latLng,
-    //   zoom: 15,
-    //   mapTypeId: google.maps.MapTypeId.ROADMAP,
-    //   disableDefaultUI: true,
-    //   zoomControl: true
-    // };
-    // $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    // console.log($scope.map);
+    
   };
 
   $scope.closeLocation = function() {
