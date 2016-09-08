@@ -8,7 +8,7 @@ angular.module('open311', [
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   $ionicConfigProvider.backButton.text('Back');
-  
+
   $stateProvider
     .state('tabs', {
       url: "/tab",
