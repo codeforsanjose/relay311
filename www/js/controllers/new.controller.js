@@ -70,6 +70,9 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
 
   $scope.openLocation = function() {
     $scope.mapModel.show();
+
+    $scope.getLocation();
+    
   };
 
   $scope.closeLocation = function() {
@@ -78,7 +81,7 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
 
   //Ari comment on 2016.8.25
   //Will move map to the map viewer
-  /*
+  
   // Geolocation
   var posOptions = {timeout: 10000, enableHighAccuracy: true};
 
@@ -101,7 +104,18 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
             $scope.$apply(function() {
               $scope.case.location = results[0].formatted_address;
             });
-            $scope.map.setZoom(15);
+            
+            var latLng = new google.maps.LatLng(lat, long);
+            var mapOptions = {
+              center: latLng,
+              zoom: 15,
+              mapTypeId: google.maps.MapTypeId.ROADMAP,
+              disableDefaultUI: true,
+              zoomControl: true
+            };
+            $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            
+            // $scope.map.setZoom(15);
             var marker = new google.maps.Marker({
               position: {'lat':lat, 'lng':long},
               map: $scope.map,
@@ -130,17 +144,8 @@ function($scope, $ionicPlatform, API, App, $state, $cordovaCamera, $ionicModal, 
       }
     })
   }
-  */
+  
 
-  // var latLng = new google.maps.LatLng(37.3315876, -121.8905004);
-  // var mapOptions = {
-  //   center: latLng,
-  //   zoom: 15,
-  //   mapTypeId: google.maps.MapTypeId.ROADMAP,
-  //   disableDefaultUI: true,
-  //   zoomControl: true
-  // };
-  // $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 
   /***
