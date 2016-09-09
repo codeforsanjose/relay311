@@ -1,32 +1,37 @@
 <ion-view class="home" view-title="Relay311">
-    <ion-content class="padding">
-        <div class="circle-row">
-            <div class="circle-container">
-                <div ng-click="onClick('new')" class="circle">
-                    <i class="icon ion-archive"></i>
-                </div>
-                <span class="btn-title">New Request</span>
+    <ion-content>
+        <div class="home-content">
+
+          <div class="row">
+            <div class="col">
+              <div id="btn-new" ng-click="onMenuClick('new')">
+                <img src="img/menu/btn_new.png" class="menu-button"/>
+              </div>
+              <span class="menu-title">New Request</span>
             </div>
-            <div class="circle-container">
-                <div ng-click="onClick('recent')" class="circle">
-                    <i class="icon ion-email-unread"></i>
-                </div>
-                <span class="btn-title">Recent</span>
+            <div class="col">
+              <div id="btn-recent" ng-click="onMenuClick('recent')">
+                <img src="img/menu/btn_recent.png" class="menu-button"/>
+              </div>
+              <span class="menu-title">Recent</span>
             </div>
-        </div>
-        <div class="circle-row">
-            <div class="circle-container">
-                <div ng-click="onClick('mine')" class="circle">
-                    <i class="icon ion-shuffle"></i>
-                </div>
-                <span class="btn-title">My Requests</span>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div id="btn-mine" ng-click="onMenuClick('mine')">
+                <img src="img/menu/btn_my.png" class="menu-button"/>
+              </div>
+              <span class="menu-title">My Requests</span>
             </div>
-            <div class="circle-container">
-                <div ng-click="onClick('account')" class="circle">
-                    <i class="icon ion-person"></i>
-                </div>
-                <span class="btn-title">Account</span>
+            <div class="col">
+              <div id="btn-account" ng-click="onMenuClick('account')">
+                <img src="img/menu/btn_account.png" class="menu-button"/>
+              </div>
+              <span class="menu-title">Account</span>
             </div>
+          </div>
+
         </div>
     </ion-content>
 </ion-view>

@@ -1,14 +1,14 @@
-angular.module('open311', [
+var app = angular.module('open311', [
   'ionic',
   'ngCordova',
   'ngStorage',
   'open311.controllers',
   'open311.services'
-])
+]);
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+app.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
   $ionicConfigProvider.backButton.text('Back');
-  
+
   $stateProvider
     .state('tabs', {
       url: "/tab",
@@ -81,3 +81,5 @@ angular.module('open311', [
    $urlRouterProvider.otherwise("/tab/home");
 
 });
+
+
