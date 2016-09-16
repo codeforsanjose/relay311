@@ -1,7 +1,12 @@
 <ion-view view-title="Recent">
   <ion-content class="padding">
+    <div class="center">
+      <ion-spinner ng-hide=loadComplete icon="lines"></ion-spinner>
+      <ion-label ng-hide=loadComplete class="center">Loading...</ion-label>
+      <ion-label class="center" ng-show=loadNoRec>No Records...</ion-label>
+      <ion-label class="center" ng-show=loadError>Load error...</ion-label>
+    </div>
     <ion-list>
-
       <!-- image -->
       <ion-item ng-repeat="case in cases" class="item-thumbnail-right item-icon-right" type="item-text-wrap" href="#/tab/recent/{{case.service_request_id}}">
         <img ng-src="{{case.media_url}}" alt="{{case.service_name}}">

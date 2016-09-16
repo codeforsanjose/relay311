@@ -1,5 +1,5 @@
 angular.module('open311.controllers')
-.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$ionicLoading', '$cordovaGeolocation', 'API', '$ionicPopup', function ($scope, $ionicPlatform, $ionicLoading, $cordovaGeolocation, API, $ionicPopup) {
+.controller('RecentCasesCtrl', ['$scope', '$ionicPlatform', '$cordovaGeolocation', 'API', '$ionicPopup', function ($scope, $ionicPlatform, $cordovaGeolocation, API, $ionicPopup) {
 
 
     var positionHandler = function(position){
@@ -31,6 +31,7 @@ angular.module('open311.controllers')
                 content: 'No records found!'
               }).then(function(res) {
                 console.log('No records Alert Box');
+                $scope.loadNoRec = true
               });              
             }
             $scope.cases = data;               
@@ -41,18 +42,16 @@ angular.module('open311.controllers')
               content: 'Couldn\'t fetch records!'
             }).then(function(res) {
               console.log('Service call failed Alert Box');
+              $scope.loadError = true
             });
           }
-          $ionicLoading.hide();
+          $scope.loadComplete = true
       });
     };
 
     // same as document ready
     $ionicPlatform.ready(function() {
       $scope.haveData = false;
-      $ionicLoading.show ({
-        template: 'Loading...'
-      });
 
       var positionOptions = {timeout: 10000, enableHighAccuracy: true};
       $cordovaGeolocation.getCurrentPosition(positionOptions).then(positionHandler);
