@@ -9,29 +9,29 @@ Make sure you have [Node.js](https://nodejs.org/en/) installed.  We usually reco
 
 Then, install [Ionic](http://ionicframework.com/):
 ```
-# You may need to use `sudo`
-$ npm install -g ionic cordova
+npm install -g ionic cordova
 ```
 
 Clone the project.
 ```
-$ git clone https://github.com/codeforsanjose/sj311-ionic.git
+git clone https://github.com/codeforsanjose/relay311
 ```
 
-Change to sj311-ionic folder, and install dependencies.
+Install dependencies.
 ```
+cd relay311
 ionic state restore
 ```
 
 To run as web project
 ```
-$ ionic serve
+ionic serve
 ```
 
 To run as mobile project, add mobile platforms accordingly and run it.
 ```
-$ ionic run ios
-$ ionic run android
+ionic run ios
+ionic run android
 ```
 
 See ionic installation guide if you need more information (http://ionicframework.com/docs/guide/installation.html)
